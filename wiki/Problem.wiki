@@ -1,0 +1,29 @@
+#summary The problem that this language will solve.
+#labels Phase-Requirements,Phase-Design
+
+We will implement a part of jQuery in JavaScript. Given that our only background in JavaScript is from what we learned in this class, we believe that this will be a good exercise in learning more about both Javascript and how jQuery changes how people write Javascript.
+
+1. Traversing through the DOM to modify, add, and remove HTML nodes using JavaScript can be tedious. Finding certain tags and modifying their corresponding nodes and attributes is doable using JavaScript, but it can take too many steps and generate messy code. This is especially true when we want to do something to all instances of a particular tag, such as wrapping them with more markup.
+Here is a snippet of ugly JavaScript code found on http://articles.sitepoint.com/article/jquery-javascipt-designers :
+
+{{{
+function fancyRules() {
+  if (!document.getElementsByTagName) return;
+  var hr = document.getElementsByTagName("hr");
+  for (var i=0; i&lt;hr.length; i++) {
+    var newhr = hr[i];
+    var wrapdiv = document.createElement('div');
+    wrapdiv.className = 'line';
+    newhr.parentNode.replaceChild(wrapdiv, newhr);
+    wrapdiv.appendChild(newhr);
+  }
+}
+window.onload = fancyRules;
+}}}
+
+This is what it does: when the page loads, look through all the tags for the tag “hr”. Then for each of them, make a node “div” with a class “line” and wrap the div around the hr. We see that we have to create a new element, call the parent node of the “hr” tag, replace the child of that node, and append the resulting node back to where the “hr” tag was. All of this is within a for loop since we want to do this to every “hr” tag. If we want to, say, do another wrap or perform other such modifications to the node, even more messy code would be required.
+We would like to make this more simple. We want an easy way to access HTML nodes and do multiple modifications to them and/or their attributes. In this case, it would be efficient if we just supply one command to get all the “hr” tags (automatic looping) and call a method that uniformly does the wrapping without having to create new elements and variables, and replacing nodes. We’d also like to use abstraction mechanisms mentioned in part 3 that would make programming easier.
+
+2. Experienced programmers may not find it difficult to write this code. However, it is definitely more time consuming, and since so much code is required to do this one task, it is easy to make a mistake, and finding bugs within such long code can be challenging. Doing multiple modifications would require more and more bookkeeping: as seen in the above code, new variables need to be defined to keep track of the nodes we are working with. It can be hard to keep track of which variable does what, especially if we want to do many modifications to the nodes. Beginner programmers can easily make mistakes in all parts of this code, since there are many function calls and fields (e.g., getElementsByTagName(), createElement(), className, replaceChild(), appendChild() ) that the programmer may not be familiar with and passing around of several variables.
+
+3. JavaScript is designed to traverse and modify DOMs, and there really isn’t another language out there that can do it this well. Also, JavaScript is used in millions of web pages, so it would be hard to make everyone switch over to another language to avoid this problem. The best solution is to implement something using proper JavaScript syntax so that users could easily import it into their scripts and use the added functionality. There isn’t really any other language that can do client-side scripting beside JavaScript, and writing a whole new language would be more difficult. Therefore, we would like to make changes by extending the language.
