@@ -1,0 +1,83 @@
+#summary Analysis of jQuery.
+#labels Phase-Requirements,Phase-Design
+
+Since we are just writing a simpler version of jQuery, there is no better language to analyze than jQuery itself.
+
+1. Code Example:
+
+{{{
+<html>
+    <head>
+        <title>qqScript</title>
+        <style type="text/css">
+            .under { text-decoration: underline }
+        </style>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("p > span").hover(function() {
+                    $(this).addClass("under");
+                },function() {
+                    $(this).removeClass("under");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <a href="http://jquery.com/">jQuery</a>
+        <p>This was a <span>triumph</span>.</p>
+    </body>
+</html>
+}}}
+
+This is a simple jQuery example that demonstrates multiple abilities. Analyzing the code:
+
+{{{
+$(document).ready(...);
+}}}
+
+This jQuery code targets the document DOM-node, and executes the method ready. Ready according to documentation basically means "execute the body when it is done loading, but don't wait for images", as opposed to window.onLoad as normally used in Javascript, which waits for everything to finish loading.
+
+{{{
+$("p > span").hover(onstate,offstate);
+}}}
+
+The target for this is some kind of selector, which will target any span tag that is a child of a paragraph tag. The hover method takes two arguments, a function to execute for the hover on state, and a function to execute when the mouse leaves the on state. In the above example, it will apply a CSS class that underlines the span when it is hovered.
+
+2. Implementation:
+
+In mixed Javascript and pseudocode:
+
+{{{
+function $(target){
+    obj = (find target in DOM);
+    return JObject(obj);
+}
+
+function JObject(obj){
+    this.target = obj
+    this.ready = function(block){
+    (invoke block when obj is loaded)
+    }
+    this.hover = function(hover,unhover){
+        (invoke hover when obj is hovered, and unhover when it is no longer hovered)
+    }
+    ...
+}
+}}}
+
+All jQuery statements are in something of this form:
+
+{{{
+$(target).method(args);
+}}}
+
+I've briefly looked over the source code without really understanding anything in it, but I can deduce that $ is, strangely, the name of a Javascript function. It is given an argument target, and from there returns some JObject that responds to method. All of jQuery's methods should be defined somewhere inside JObject.
+
+Something I'm not too clear on is when something like this happens (as in the hover example above):
+
+{{{
+$(this).method(args);
+}}}
+
+I'm not too clear what this would reference in a normal Javascript scenario. It is possible that jQuery has some sort of check built in that redirects this to what it should be, or equally likely that it works fine without tampering. It turns out that this is handled normally by Javascript.
