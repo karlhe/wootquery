@@ -1,9 +1,11 @@
 #summary Analysis of jQuery.
 #labels Phase-Requirements,Phase-Design
+----
+=Part 2: Study a language that solves a similar problem and describe it in this homework.=
 
 Since we are just writing a simpler version of jQuery, there is no better language to analyze than jQuery itself.
 
-1. Code Example:
+==1. Code Example:==
 
 {{{
 <html>
@@ -44,7 +46,7 @@ $("p > span").hover(onstate,offstate);
 
 The target for this is some kind of selector, which will target any span tag that is a child of a paragraph tag. The hover method takes two arguments, a function to execute for the hover on state, and a function to execute when the mouse leaves the on state. In the above example, it will apply a CSS class that underlines the span when it is hovered.
 
-2. Implementation:
+==2. Implementation:==
 
 In mixed Javascript and pseudocode:
 
