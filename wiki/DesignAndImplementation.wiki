@@ -1,0 +1,9 @@
+#summary Here we describe details about implementation and decisions.
+#labels Phase-Requirements,Phase-Design,Phase-Implementation
+
+=Design and Implementation=
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
