@@ -1,5 +1,8 @@
 #summary The problem that this language will solve.
 #labels Phase-Requirements,Phase-Design
+----
+=Part 1: Choose the problem that your language will solve.=
+
 
 We will implement a part of jQuery in JavaScript. Given that our only background in JavaScript is from what we learned in this class, we believe that this will be a good exercise in learning more about both Javascript and how jQuery changes how people write Javascript.
 
