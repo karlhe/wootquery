@@ -13,7 +13,7 @@ Here is a snippet of ugly JavaScript code found on http://articles.sitepoint.com
 function fancyRules() {
   if (!document.getElementsByTagName) return;
   var hr = document.getElementsByTagName("hr");
-  for (var i=0; i&lt;hr.length; i++) {
+  for (var i=0; i<hr.length; i++) {
     var newhr = hr[i];
     var wrapdiv = document.createElement('div');
     wrapdiv.className = 'line';
