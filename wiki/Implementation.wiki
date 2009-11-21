@@ -1,0 +1,29 @@
+#summary Some thought behind how to implement the language.
+#labels Phase-Design
+
+Javascript is the only really universally-supported language for client-side scripting. It is unreasonable to try to make our language work as a stand-alone scripting language. In that case, there are only really two potential options:
+
+   1. Make our language work as a library on top on Javascript.
+   2. Make our language "compile" into Javascript, as in everything will be converted into pure Javascript as opposed to needing a library to support the syntax.
+
+==Frontend:==
+In case 1, Javascript should handle most of the problems with internal representation, since our language would be valid Javascript. In case 2, anything could work. Most likely we would convert to an AST that can be broken down into optimized Javascript. We would have to take care to recognize actual Javascript in the midst of the code and not convert it, as people may want to use Javascript in places our language is insufficient.
+
+==The Core Language:==
+In case 1, the core language will simply be Javascript. All features will be some kind of sugar on top of Javascript. For example, `$("a").addClass("b");` would break down to something like this in pseudocode:
+
+{{{
+find element tags "a" in document
+for each element "a" add attribute "class" with value "b"
+}}}
+
+The desugaring will basically be underlying Javascript functions that will take in the statements and run the actual Javascript needed. `$` is a function that returns objects, and the .methods would invoke the methods within those objects. In case 2, the entire langague will have to be completely parsed and interpreted, then formulated into valid Javascript. In a convoluted way this may still be considered "sugar".
+
+==Internal Representation:==
+In case 1, there aren't terribly many ways to do it. The jQuery way of doing is is creating some kind of jQuery object that responds to the appropriate methods, every time a method is called on a jQuery object. In case 2, most likely the code will be converted to an AST or maybe bytecode if we deem that advantageous.
+
+==Interpreter/Compiler:==
+In case 1, the code will simply be interpreted as a Javascript function call, albeit a really long one at times. In case 2, the code will be compiled into Javascript, probably after an intermediary AST step. However, it would be better not to try to do something like bytecode since that would complicate the process greatly.
+
+==Debugging:==
+In case 1, debugging will likely consist of using something like Firebug and the Javascript console, in other words just standard Javascript debugging tools. In case 2, similar tools can be used (if the code actually compiles) and then problems can be found that way, or well-thought-out error messages in the interpreter/compiler and test code in the language could point out flaws. 
