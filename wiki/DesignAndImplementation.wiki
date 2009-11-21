@@ -1,5 +1,5 @@
 #summary Here we describe details about implementation and decisions.
-#labels Phase-Requirements,Phase-Design,Phase-Implementation
+#labels Phase-Requirements,Phase-Design,Featured
 
 
 These are the four items related to design of our project, each page is a part of HW3.
