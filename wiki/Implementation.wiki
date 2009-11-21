@@ -1,5 +1,7 @@
 #summary Some thought behind how to implement the language.
 #labels Phase-Design
+----
+=Part 4: Decide on the implementation.=
 
 Javascript is the only really universally-supported language for client-side scripting. It is unreasonable to try to make our language work as a stand-alone scripting language. In that case, there are only really two potential options:
 
