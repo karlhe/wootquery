@@ -1,9 +1,9 @@
 #summary Here we describe details about implementation and decisions.
 #labels Phase-Requirements,Phase-Design,Phase-Implementation
 
-=Design and Implementation=
 
-  * [Problem]
-  * [jQuery]
-  * [Features]
-  * [Implementation]
+These are the four items related to design of our project, each page is a part of HW3.
+  * Part 1: [Problem]
+  * Part 2: [jQuery]
+  * Part 3: [Features]
+  * Part 4: [Implementation]
