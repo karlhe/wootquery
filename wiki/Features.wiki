@@ -1,5 +1,7 @@
 #summary Features of our mini-interpretation
 #labels Phase-Requirements,Phase-Design
+----
+=Part 3: What features specifically will your language support.=
 
 1. We want to have selectors that can simply find all the tags we are looking for. `$(“p”)` should return all `<p>` tags and allow us to work with them without having to do a for loop. We can be more specific in our search for tags by specifying things like attributes: `$(“p[title=’hi’]”)` matches all `<p>` tags with title “hi”. These selectors return JObjects, and we can manipulate these nodes by calling JObject methods. For example, `$(“p”).empty()` removes all child nodes of all p tags. We would like to have methods that can change the content of the nodes, insert or remove things in or around them, replace them with something else, and do other such manipulations. We’d also like to do CSS modifications, such as changing the position or height and width of the matched elements. We’d like to have a simple way to add in events, like `.hover()`, which would do something when the mouse hovers over the selected elements. Other methods would add effects, such as making some elements fade and animating others. We’ll support chaining, where we can call multiple methods on the selected elements. We’d like to add in extensions like if—else to allow control-flow in our JQuery calls. We'll basically be finding and modifying nodes in a more simple way.
 
