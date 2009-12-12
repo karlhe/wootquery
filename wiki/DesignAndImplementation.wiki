@@ -7,3 +7,6 @@ These are the four items related to design of our project, each page is a part o
   * Part 2: [jQuery]
   * Part 3: [Features]
   * Part 4: [Implementation]
+
+These are code examples that we wish to be able to implement:
+  * [WootQueryExamples]
