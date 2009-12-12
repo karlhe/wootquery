@@ -3,16 +3,14 @@
 
 = Syntax =
 
-Although we are modeling after jQuery, this is our own language so we can probably take some liberties. To invoke wootQuery, we will have the following syntax:
-
+After a bit of deliberation, we've decided to use the same syntax as jQuery. We considered this:
 {{{
 woot(element).method1(arg);
 }}}
 
-Of course, longer call chains are also possible:
-
+However, it is obviously a method, and doesn't offer the same sense of abstraction as this:
 {{{
-woot(element).method1(arg).method2(arg);
+$(element).method1(arg);
 }}}
 
 Out of the many abilities of jQuery, we've decided that implementing selectors, CSS/content manipulation, and event handling would be done first. The rest of the functionality will be implemented depending on time constraints.
