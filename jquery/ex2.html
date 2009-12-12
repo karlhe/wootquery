@@ -4,18 +4,37 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>jQuery Test</title>
+    <title>Example 2</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="index.css" media="screen" title="Default" />
+    <style type="text/css">
+      .hidden {
+        display: none;
+      }
+      div {
+        margin: 1em;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+    </style>
     <script type="text/javascript" src="jquery-1.3.2.js"></script>
-    <script type="text/javascript" src="jquery-input.js"></script>
+    <script type="text/javascript">
+      // jQuery Input:
+      $(document).ready(function(){
+          $("#show-second").click(function(event){
+              $("#second-div").toggleClass("hidden");
+          });
+      });
+    </script>
   </head>
   <body>
     <h1>Welcome to the Show</h1>
     <div id="first-div">
-      <p>This text is in a paragraph in <span class="code">#first-div</span>.</p>
+      <h2>#first-div</h2>
+      <p>This text is in a paragraph in <code>#first-div</code>.</p>
+      <p><a href="#second-div" id="show-second">Click here</a> to show <code>#second-div</code></p>
     </div>
-    <div id="second-div">
+    <div id="second-div" class="hidden">
+      <h2>#second-div</h2>
       <ul>
         <li>This list is in <span class="code">#second-div</span>.</li>
         <li class="second">This list element has class <span class="code">.second</span>.</li>
