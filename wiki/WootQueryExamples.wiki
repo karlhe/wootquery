@@ -19,7 +19,7 @@ Out of the many abilities of jQuery, we've decided that implementing selectors, 
 
 These examples (implemented with jQuery) can be found in the repository here:
 /trunk/jquery/exN.html
-
+They are valid HTML files.
 
 == Example 1 ==
 
