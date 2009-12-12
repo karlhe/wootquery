@@ -6,6 +6,13 @@
   <head>
     <title>Example 1</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      div {
+        margin: 1em;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+    </style>
     <script type="text/javascript" src="jquery-1.3.2.js"></script>
     <script type="text/javascript">
       // jQuery Input:
@@ -13,13 +20,18 @@
         $("body").append("<h1>Generated Page</h1>");
         first = "<div id=\"first\"></div>";
         $("body").append(first);
+        $("#first").append("<h2>#first</h2>");
         $("#first").append("<p>This example focuses on DOM traversal/manipulation.</p>");
         $("#first").append("<p>This entire page was generated with Javascript.</p>");
+        $("#first").append("<ul><li>A list element</li></ul>");
         second = "<div id=\"second\"></div>";
         $("body").append(second);
+        $("#second").append("<h2>#second</h2>");
         $("#second").append("<ul></ul>");
         $("#second > ul").append("<li>One potato</li>");
         $("#second > ul > li").append("<li>Two potato</li>");
+        $("ul").append("<li>I'm in two places!</li>");
+        $("#first ul").append("<li>I'm not, however.</li>");
       });
     </script>
   </head>
