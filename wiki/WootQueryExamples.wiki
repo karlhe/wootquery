@@ -15,26 +15,153 @@ Of course, longer call chains are also possible:
 woot(element).method1(arg).method2(arg);
 }}}
 
+Out of the many abilities of jQuery, we've decided that implementing selectors, CSS/content manipulation, and event handling would be done first. The rest of the functionality will be implemented depending on time constraints.
+
 = Example Code =
 
-Out of the many functions of jQuery, the following 3 likely provide the most useful basic functionality:
+These examples (implemented with jQuery) can be found in the repository here:
+/trunk/jquery/exN.html
 
-Selection:
+
+== Example 1 ==
+
+To exhibit the ability to manipulate the DOM, this example generates an entire page using just wootQuery:
 {{{
-woot("#idname");
-woot(".classname");
-woot("elementname");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+  "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Example 1</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      div {
+        margin: 1em;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+    </style>
+    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript">
+      // jQuery Input:
+      $(document).ready(function(){
+        $("body").append("<h1>Generated Page</h1>");
+        first = "<div id=\"first\"></div>";
+        $("body").append(first);
+        $("#first").append("<h2>#first</h2>");
+        $("#first").append("<p>This example focuses on DOM traversal/manipulation.</p>");
+        $("#first").append("<p>This entire page was generated with Javascript.</p>");
+        $("#first").append("<ul><li>A list element</li></ul>");
+        second = "<div id=\"second\"></div>";
+        $("body").append(second);
+        $("#second").append("<h2>#second</h2>");
+        $("#second").append("<ul></ul>");
+        $("#second > ul").append("<li>One potato</li>");
+        $("#second > ul > li").append("<li>Two potato</li>");
+        $("ul").append("<li>I'm in two places!</li>");
+        $("#first ul").append("<li>I'm not, however.</li>");
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Nothing is here! -->
+  </body>
+</html>
 }}}
 
-Manipulation:
+
+== Example 2 ==
+
+This example focuses on the ability to manipulate CSS classes and element content:
+
 {{{
-woot("a").replaceWith("<b>This is no longer a link!</b>");
-woot("p").html("Hello there!");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+  "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Example 2</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      div {
+        margin: 1em;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+      .hidden {
+        display: none;
+      }
+      .blue {
+        background: #009;
+        color: #fff;
+      }
+      .blue a {
+        color: #fff;
+      }
+      .highlight {
+        background: #ddd;
+        color: #000;
+        font-family: Consolas, "Courier New", Courier, monospace;
+        font-size: 9  0%;
+      }
+    </style>
+    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript">
+      // jQuery Input:
+      function showSecond(){
+        $("#second-div").toggleClass("hidden");
+      }
+      function makeBlue(){
+        $("#first-div").toggleClass("blue");
+      }
+      function highlight(){
+        $("code").toggleClass("highlight");
+      }
+      function grow(target){
+        $(target).append("==");
+      }
+      itemCount = 1;
+      function addItem(target){
+        $(target).append("<li>This is element #"+itemCount+"</li>");
+        itemCount++;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to the Show</h1>
+    <div id="first-div">
+      <h2>#first-div</h2>
+      <p>This example focuses on <abbr title="Cascading Style Sheets">CSS</abbr> and content manipulation.</p>
+      <p>This text is in a paragraph in <code>#first-div</code>.</p>
+      <p><a href="#show-second" onClick="javascript:showSecond();">Click here</a> to toggle <code>#second-div</code></p>
+    </div>
+    <div id="second-div" class="hidden">
+      <h2>#second-div</h2>
+      <ul>
+        <li>This list is in <span class="code">#second-div</span>.</li>
+        <li class="second">This list element has class <span class="code">.second</span>.</li>
+        <li>Make <code>#first-div</code> <a href="#make-blue" onClick="javascript:makeBlue();">blue!</a></li>
+        <li>Highlight, <a href="#highlight" onClick="javascript:highlight();">ACTIVATE</a></li>
+        <li>Make me <a href="#grow" onClick="javascript:grow(this);">GROW: </a></li>
+        <li><a href="#add-li" onClick="javascript:addItem('#add-to-me');">Add</a> a subpoint:
+          <ul id="add-to-me">
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
 }}}
 
-CSS:
+
+== Example 3 ==
+
+This example focuses on event handlers:
+
 {{{
-woot("b").addClass("highlight");
+Insert example here
 }}}
 
 
