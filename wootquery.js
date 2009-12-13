@@ -29,10 +29,23 @@
                 this.elements = [document.getElementById(elementName)];
             // Check if given class
             } else if(selector.match(classElement)) {
-                alert("Class selectors not yet supported.");
+                elementName = selector.match(text)[0];
+                classExp = new RegExp("\\b"+elementName+"\\b");
+                nodeList = document.getElementsByClassName(elementName);
+                elementList = []
+                for(var i=0; i<nodeList.length; i++) {
+                    elementList.push(nodeList[i]);
+                }
+                this.elements = elementList;
             // Check if given HTML tag
             } else if(selector.match(tagElement)) {
-                alert("Tag selectors not yet supported.");
+                elementName = selector.match(text)[0];
+                nodeList = document.getElementsByTagName(elementName);
+                elementList = []
+                for(var i=0; i<nodeList.length; i++) {
+                    elementList.push(nodeList[i]);
+                }
+                this.elements = elementList;
             // TODO: Implement complex selectors, e.g. "#foo > .bar"
             } else {
                 alert("Selector not recognized: %s",selector);
@@ -58,9 +71,9 @@
             });
         },
         
-        //prepends content to innerHTML of matched elements
+        // Prepends content to innerHTML of matched elements
         prepend: function(content) {
-            this.elements.map(function(element){
+            this.elements.map(function(element) {
                 element.innerHTML = content + element.innerHTML;
             });
         },
@@ -68,7 +81,7 @@
         //classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
         addClass: function(classNames) {
             this.elements.map(function(element) {
-                element.setAttribute("class", classNames);
+                element.setAttribute("class", element.getAttribute("class") + ' ' + classNames);
             });
         },
         
