@@ -46,11 +46,17 @@
             alert("All your base, are belong to us!");
         },
         
-        // Returns the innerHTML of the first DOM element
+        // Returns the innerHTML of the first matched element
         html: function() {
             return this.elements[0].innerHTML;
         },
         
+        // Appends content to innerHTML of matched elements
+        append: function(content) {
+            this.elements.map(function(element) {
+                element.innerHTML = element.innerHTML + content;
+            });
+        },
         
     }
     // Allow access to wootQuery.prototype methods

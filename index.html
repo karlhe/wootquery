@@ -17,6 +17,7 @@
       <li><a href="#" onClick="javascript:$().capture();">Click me!</a></li>
       <li><a href="#" onClick="javascript:this.innerHTML = $(woot).html();">Modify by Element!</a></li>
       <li><a href="#" onClick="javascript:this.innerHTML = $('#woot').html();">Modify by ID!</a></li>
+      <li><a href="#" onClick="javascript:$(woot).append(' <b>I be appended!</b>');">Modify #woot!</a></li>
     </ul>
     <script type="text/javascript">
       var woot = document.getElementById("woot");
