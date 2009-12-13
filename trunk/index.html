@@ -11,18 +11,20 @@
     <script type="text/javascript" src="input.js"></script>
   </head>
   <body>
-    <h1>Welcome to the Show</h1>
-    <div id="woot">Hello, everybody!</div>
+    <h1 class="asdf">Welcome to the Show</h1>
+    <div id="woot" class="asdf">Hello, everybody!</div>
     <ul>
       <li><a href="#" onClick="javascript:$().capture();">Click me!</a></li>
       <li><a href="#" onClick="javascript:this.innerHTML = $(woot).html();">Modify by Element!</a></li>
       <li><a href="#" onClick="javascript:this.innerHTML = $('#woot').html();">Modify by ID!</a></li>
       <li><a href="#" onClick="javascript:$(woot).append(' <b>I be appended!</b>');">Modify #woot!</a></li>
+      <li><a href="#" onClick="javascript:$('li').append(' <b>List element!</b>');">Modify list items</a></li>
+      <li><a href="#" onClick="javascript:$('.asdf').prepend(' <b>Wooties!</b>');">Wooties!</a></li>
     </ul>
     <script type="text/javascript">
       var woot = document.getElementById("woot");
       $('#woot').addClass("sup yo");
-      $('#woot').removeClass();
+      // $('#woot').removeClass();      
     </script>
   </body>
 </html>
