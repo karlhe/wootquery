@@ -58,6 +58,59 @@
             });
         },
         
+        //classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
+        addClass: function(classNames) {
+            this.elements.map(function(element) {
+                element.setAttribute("class", classNames);
+            });
+        },
+        
+        //see if className is a class attribute
+        //returns true if the specified class is present in at least one of the matched elements
+        hasClass: function(className) {
+            var bool = false;
+            this.elements.map(function(element) {
+                var getClass = element.getAttribute("class");
+                if (getClass != "" && getClass != null ) {
+                    var splitClass = getClass.split(" ");
+                    if (splitClass.indexOf(className) != -1) {
+                        //class is found
+                        bool = true;
+                    }
+                }
+            });
+            return bool;
+        },
+        
+        //removes the specified classes from the matched elements
+        //removes all classes if no argument given
+        removeClass: function(classNames) {
+            if (classNames == null) {
+                //remove all classes
+                this.elements.map(function(element) {
+                    element.setAttribute("class", "");
+                });
+            } else {
+                var classNamesSplit = classNames.split(" ");
+                this.elements.map(function(element) {
+                    var getClass = element.getAttribute("class");
+                    if (getClass != "" && getClass != null) {
+                        var splitClass = getClass.split(" ");
+                        var newClass = [];
+                        var i = 0;
+                        for (i=0; i<splitClass.length; i++) {
+                            //only add in classes not specified by the argument
+                            if (classNamesSplit.indexOf(splitClass[i]) == -1) {
+                            newClass.push(splitClass[i]);
+                            }
+                        }
+                        //set the class to be the new class list that doesn't include the argument classes
+                        element.setAttribute("class", newClass.join(" "));
+                    }
+                });            
+            }
+        },
+        
     }
     // Allow access to wootQuery.prototype methods
     wootQuery.fn.init.prototype = wootQuery.fn;
