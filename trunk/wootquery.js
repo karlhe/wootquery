@@ -58,6 +58,13 @@
             });
         },
         
+        //prepends content to innerHTML of matched elements
+        prepend: function(content) {
+            this.elements.map(function(element){
+                element.innerHTML = content + element.innerHTML;
+            });
+        },
+        
         //classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
         addClass: function(classNames) {
             this.elements.map(function(element) {
@@ -110,6 +117,19 @@
                 });            
             }
         },
+        
+        //return the given attribute of the first matched element
+        attr: function(name) {
+            return this.elements[0].getAttribute(name);
+        },
+        
+        //set a single property to a value on all the matched elements
+        setAttr: function(key, value) {
+            this.elements.map(function(element) {
+                element.setAttribute(key, value);
+            });
+        },
+        
         
     }
     // Allow access to wootQuery.prototype methods
