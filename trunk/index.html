@@ -13,6 +13,10 @@
   <body>
     <h1>Welcome to the Show</h1>
     <div id="woot">Hello, everybody!</div>
-    <p><a href="javascript:$().capture();">Click me!</a></p>
+    <p><a href="#" onClick="javascript:$().capture();">Click me!</a></p>
+    <p><a href="#" onClick="javascript:this.innerHTML = $(woot).html();">Copy the page</a></p>
+    <script type="text/javascript">
+      var woot = document.getElementById("woot");
+    </script>
   </body>
 </html>
