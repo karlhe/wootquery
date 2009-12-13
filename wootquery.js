@@ -81,7 +81,12 @@
         //classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
         addClass: function(classNames) {
             this.elements.map(function(element) {
-                element.setAttribute("class", element.getAttribute("class") + ' ' + classNames);
+                var getClass = element.getAttribute("class");
+                if (getClass == "" || getClass == null) {
+                    element.setAttribute("class", classNames);
+                } else {
+                    element.setAttribute("class", getClass + ' ' + classNames);
+                }
             });
         },
         
