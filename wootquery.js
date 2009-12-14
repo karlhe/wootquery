@@ -22,33 +22,48 @@
             classElement = /^\.[\w-]+$/;
             
             function fetchElement(node,selector,type) {
+                elementList = [];
+                
                 // Check if given ID
                 if(selector.match(idElement)) {
                     elementName = selector.match(text)[0];
-                    return [node.getElementById(elementName)];
+                    elementList.push(node.getElementById(elementName));
                 // Check if given class
                 } else if(selector.match(classElement)) {
                     elementName = selector.match(text)[0];
                     classExp = new RegExp("\\b"+elementName+"\\b");
                     nodeList = node.getElementsByClassName(elementName);
-                    elementList = []
                     for(var i=0; i<nodeList.length; i++) {
                         elementList.push(nodeList[i]);
                     }
-                    return elementList;
                 // Check if given HTML tag
                 } else if(selector.match(tagElement)) {
                     elementName = selector.match(text)[0];
                     nodeList = node.getElementsByTagName(elementName);
-                    elementList = []
                     for(var i=0; i<nodeList.length; i++) {
                         elementList.push(nodeList[i]);
                     }
-                    return elementList;
-                // Unrecognized selector
-                } else {
-                    return [];
                 }
+                
+                // Child selector
+                if(type == '>') {
+                    returnList = [];
+                    while(elementList.length > 0) {
+                        element = elementList.shift();
+                        for(var i=0; i<node.childNodes.length; i++) {
+                            if(node.childNodes[i] == element) {
+                                returnList.push(element);
+                                break;
+                            }
+                        }
+                    }
+                    return returnList;
+                    
+                // Ancestor selector
+                } else {
+                    return elementList;
+                }
+                
             }
             
             // Check if given DOM node
@@ -75,9 +90,8 @@
                         // Set selection type and pop next node if selector present
                         if(!currentSelector.match(simpleExpr)) {
                             selectorType = currentSelector;
-                            currentNode = currentNodes.shift();
+                            currentSelector = selectorItems.shift();
                         }
-                        
                         // currentNode should now actually be a node
                         // Fetch the selected elements for the current node
                         newNodes = fetchElement(currentNode,currentSelector,selectorType);
