@@ -21,7 +21,7 @@
             idElement = /^#[\w-]+$/;
             classElement = /^\.[\w-]+$/;
             
-            function fetchElement(node,selector) {
+            function fetchElement(node,selector,type) {
                 // Check if given ID
                 if(selector.match(idElement)) {
                     elementName = selector.match(text)[0];
@@ -63,35 +63,38 @@
                 currentNodes = [document];
                 
                 // Find elements for each step in the selector
-                for(var i=0; i<selectorItems.length; i++) {
+                while(selectorItems.length > 0) {
+                    currentSelector = selectorItems.shift();
                     nextNodes = [];
                     
                     // Apply for all elements currently selected
                     while(currentNodes.length > 0) {
                         currentNode = currentNodes.shift();
+                        selectorType = '';
                         
-                        // The current selector is a node expression, e.g. 'ul'
-                        if(selectorItems[i].match(simpleExpr)) {
-                            
-                            // Fetch the selected elements for the current node
-                            newNodes = fetchElement(currentNode,selectorItems[i]);
-                            
-                            // Verify uniqueness of elements
-                            while(newNodes.length > 0) {
-                                newNode = newNodes.shift();
-                                for(var i=0; i<nextNodes.length; i++) {
-                                    if(newNode == nextNodes[i]) {
-                                        newNode = null;
-                                        break;
-                                    }
-                                }
-                                if(newNode != null) {
-                                    nextNodes.push(newNode);
+                        // Set selection type and pop next node if selector present
+                        if(!currentSelector.match(simpleExpr)) {
+                            selectorType = currentSelector;
+                            currentNode = currentNodes.shift();
+                        }
+                        
+                        // currentNode should now actually be a node
+                        // Fetch the selected elements for the current node
+                        newNodes = fetchElement(currentNode,currentSelector,selectorType);
+                        
+                        // Verify uniqueness of elements
+                        // TODO: Optimize this; does some redundant looping
+                        while(newNodes.length > 0) {
+                            newNode = newNodes.shift();
+                            for(var i=0; i<nextNodes.length; i++) {
+                                if(newNode == nextNodes[i]) {
+                                    newNode = null;
+                                    break;
                                 }
                             }
-                        // The current selector is a selector, e.g. '>'
-                        } else {
-                            // TODO: Implement different selector types
+                            if(newNode != null) {
+                                nextNodes.push(newNode);
+                            }
                         }
                     }
                     // Load the next set of nodes
