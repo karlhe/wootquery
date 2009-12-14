@@ -11,7 +11,7 @@
     <script type="text/javascript" src="input.js"></script>
   </head>
   <body>
-    <h1 class="asdf">Welcome to the Show</h1>
+    <h1 id="sup" class="asdf">Welcome to the Show</h1>
     <div id="woot" class="asdf">Hello, everybody!</div>
     <ul>
       <li><a href="#" onClick="javascript:$().capture();">Click me!</a></li>
@@ -26,7 +26,26 @@
     <script type="text/javascript">
       var woot = document.getElementById("woot");
       $('#woot').addClass("sup yo");
-      // $('#woot').removeClass();      
+      /**
+                   $('#woot').removeClass();      
+                  alert($('#woot').html());
+                  $('#woot').setHtml("waddup");
+                  alert($('#woot').html());      
+                **/
+      //$('#woot').after("<p><i><b>sup</b></i></p>");          
+      //$('#woot').before("<b>sup</b>");
+      //$('#woot').wrap("<b></b>");
+      //$('#woot').wrap(document.createElement("b"));
+      //$('#woot').wrapInner(document.createElement("b"));
+      //$('#woot').wrapInner("<b></b>");      
+      //$('#woot').wrapInner(document.createElement("b")).wrap("<i></i>");     
+      //$('#woot').replaceWith("<b>hi</b>");    
+        //var test = document.createElement("b");
+        //test.innerHTML = "woot";
+        //$('#woot').replaceWith(test);  
+      //$('#woot').empty().append("sup");  
+      //$('#woot').remove();
+      //$('#sup').append($('#woot').remove().html());
     </script>
   </body>
 </html>

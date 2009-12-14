@@ -9,6 +9,21 @@
         return new wootQuery.fn.init(selector);
     }
     
+    //convert html string to dom
+    function html2dom(html) {
+        var div = document.createElement("div");
+        div.innerHTML = html;
+        var domContent = div.firstChild;
+        return domContent;
+    }
+    
+    //convert dom to html string
+    function dom2html(dom) {
+        var div = document.createElement("div");
+        div.appendChild(dom);
+        return div.innerHTML;
+    }
+    
     // Define methods for the wootQuery prototype
     wootQuery.fn = wootQuery.prototype = {
         // Establish the state of the wootQuery instance
@@ -130,11 +145,20 @@
             return this.elements[0].innerHTML;
         },
         
+        //set the innerHTML contents of every matched element
+        setHTML: function(val) {
+            this.elements.map(function(element) {
+                element.innerHTML = val;
+            });
+            return this;
+        },
+        
         // Appends content to innerHTML of matched elements
         append: function(content) {
             this.elements.map(function(element) {
                 element.innerHTML = element.innerHTML + content;
             });
+            return this;
         },
         
         // Prepends content to innerHTML of matched elements
@@ -142,6 +166,7 @@
             this.elements.map(function(element) {
                 element.innerHTML = content + element.innerHTML;
             });
+            return this;
         },
         
         // classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
@@ -154,6 +179,7 @@
                     element.setAttribute("class", getClass + ' ' + classNames);
                 }
             });
+            return this;
         },
         
         // See if className is a class attribute
@@ -200,6 +226,7 @@
                     }
                 });            
             }
+            return this;
         },
         
         // Return the given attribute of the first matched element
@@ -212,9 +239,118 @@
             this.elements.map(function(element) {
                 element.setAttribute(key, value);
             });
+            return this;
         },
         
+        //insert content after each of the matched elements
+        //content is a html string
+        after: function(content) {
+            domContent = html2dom(content);
+            this.elements.map(function(element) {
+                element.parentNode.insertBefore(domContent, element.nextSibling);
+            });
+            return this;
+        },
         
+        //insert content before each of the matched elements
+        //content is a html string
+        before: function(content) {
+            domContent = html2dom(content);
+            this.elements.map(function(element) {
+                element.parentNode.insertBefore(domContent, element);
+            });  
+            return this;
+        },
+        
+         /**
+                    //wrap each matched element with the html content
+                    //content is a html string
+                    wrapHTML: function(html) {
+                        domContent = html2dom(html);
+                        this.elements.map(function(element) {
+                            element.parentNode.replaceChild(domContent,element);
+                            domContent.appendChild(element);
+                        });
+                    },
+                    
+                    //wrap each matched element with the specified dom element (in dom format, not string)
+                    wrapElem: function(elem) {
+                        this.elements.map(function(element) {
+                            element.parentNode.replaceChild(elem, element);
+                            elem.appendChild(element);
+                        });
+                    },
+                    **/
+                    
+        //wrap each matched element with the specified content
+        //content can either be an html string or dom element
+        wrap: function(content) {
+            if (typeof content == "string") {
+                //input is a html string
+                domContent = html2dom(content);
+            } else {
+                //input is a dom element
+                domContent = content;
+            }
+            this.elements.map(function(element) {
+                element.parentNode.replaceChild(domContent,element);
+                domContent.appendChild(element);
+            });
+            return this;
+        },
+        
+        //wrap the inner contents of each matched element with an html string or dom element
+        wrapInner: function(content) {
+            if (typeof content == "string") {
+                //input is an html string
+                domContent = html2dom(content);
+            } else {
+                //input is a dom element
+                domContent = content;
+            }
+            this.elements.map(function(element) {
+                domContent.innerHTML = element.innerHTML;
+                domContentHTML = dom2html(domContent);
+                element.innerHTML = domContentHTML;
+            }); 
+            return this;
+        },
+        
+        //replaces all matched elements with specified html or dom elements
+        //returns wootQuery object that was replaced, which has been removed from the dom                                                <--------- IMPLEMENT THIS PART!!!!!!!!!!!!!!!!!!!!!!!
+        replaceWith: function(content) {
+            if (typeof content == "string") {
+                //input is an html string
+                domContent = html2dom(content);
+            } else {
+                //input is a dom element
+                domContent = content;
+            }
+            this.elements.map(function(element) {
+                element.parentNode.replaceChild(domContent, element);
+            });
+        
+        },
+        
+        //remove child nodes of each of the matched elements
+        empty: function() {
+            var div = document.createElement("div");
+            this.elements.map(function(element) {
+                element.innerHTML = div.innerHTML;
+            });
+            return this;            
+        },
+        
+        //removes all matched elements from the DOM
+        //does not remove elements from the returned wootQuery object, so we can use these matched elements further
+        remove: function() {                                                    
+            this.elements.map(function(element) {
+                element.parentNode.removeChild(element);
+            });
+            return this;
+        },
+        
+ 
     }
     // Allow access to wootQuery.prototype methods
     wootQuery.fn.init.prototype = wootQuery.fn;
