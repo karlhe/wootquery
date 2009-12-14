@@ -21,43 +21,83 @@
             idElement = /^#[\w-]+$/;
             classElement = /^\.[\w-]+$/;
             
+            function fetchElement(node,selector) {
+                // Check if given ID
+                if(selector.match(idElement)) {
+                    elementName = selector.match(text)[0];
+                    return [node.getElementById(elementName)];
+                // Check if given class
+                } else if(selector.match(classElement)) {
+                    elementName = selector.match(text)[0];
+                    classExp = new RegExp("\\b"+elementName+"\\b");
+                    nodeList = node.getElementsByClassName(elementName);
+                    elementList = []
+                    for(var i=0; i<nodeList.length; i++) {
+                        elementList.push(nodeList[i]);
+                    }
+                    return elementList;
+                // Check if given HTML tag
+                } else if(selector.match(tagElement)) {
+                    elementName = selector.match(text)[0];
+                    nodeList = node.getElementsByTagName(elementName);
+                    elementList = []
+                    for(var i=0; i<nodeList.length; i++) {
+                        elementList.push(nodeList[i]);
+                    }
+                    return elementList;
+                // Unrecognized selector
+                } else {
+                    return [];
+                }
+            }
+            
             // Check if given DOM node
             if(selector.nodeType) {
                 this.elements = [selector]
             // Check if a simple selector
             } else if(selector.match(simpleExpr)) {
-                // Check if given ID
-                if(selector.match(idElement)) {
-                    elementName = selector.match(text)[0];
-                    this.elements = [document.getElementById(elementName)];
-                // Check if given class
-                } else if(selector.match(classElement)) {
-                    elementName = selector.match(text)[0];
-                    classExp = new RegExp("\\b"+elementName+"\\b");
-                    nodeList = document.getElementsByClassName(elementName);
-                    elementList = []
-                    for(var i=0; i<nodeList.length; i++) {
-                        elementList.push(nodeList[i]);
-                    }
-                    this.elements = elementList;
-                // Check if given HTML tag
-                } else if(selector.match(tagElement)) {
-                    elementName = selector.match(text)[0];
-                    nodeList = document.getElementsByTagName(elementName);
-                    elementList = []
-                    for(var i=0; i<nodeList.length; i++) {
-                        elementList.push(nodeList[i]);
-                    }
-                    this.elements = elementList;
-                // Unrecognized selector
-                } else {
-                    alert("Selector not recognized: " + selector);
-                }
+                this.elements = fetchElement(document,selector);
             // This is a complex selector
             } else {
                 selectorItems = selector.split(' ');
-                alert(selectorItems);
-                alert("Complex selector not implemented: " + selector);
+                currentNodes = [document];
+                
+                // Find elements for each step in the selector
+                for(var i=0; i<selectorItems.length; i++) {
+                    nextNodes = [];
+                    
+                    // Apply for all elements currently selected
+                    while(currentNodes.length > 0) {
+                        currentNode = currentNodes.shift();
+                        
+                        // The current selector is a node expression, e.g. 'ul'
+                        if(selectorItems[i].match(simpleExpr)) {
+                            
+                            // Fetch the selected elements for the current node
+                            newNodes = fetchElement(currentNode,selectorItems[i]);
+                            
+                            // Verify uniqueness of elements
+                            while(newNodes.length > 0) {
+                                newNode = newNodes.shift();
+                                for(var i=0; i<nextNodes.length; i++) {
+                                    if(newNode == nextNodes[i]) {
+                                        newNode = null;
+                                        break;
+                                    }
+                                }
+                                if(newNode != null) {
+                                    nextNodes.push(newNode);
+                                }
+                            }
+                        // The current selector is a selector, e.g. '>'
+                        } else {
+                            // TODO: Implement different selector types
+                        }
+                    }
+                    // Load the next set of nodes
+                    currentNodes = nextNodes;
+                }
+                this.elements = currentNodes;
             }
             
             return this;
