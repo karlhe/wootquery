@@ -1,5 +1,5 @@
 ﻿(function(){
-    // I am honestly not sure what defining these variables accomplish
+    // I am honestly not sure what defining these variables accomplishes
     var _$ = window.$;
     var _wootQuery = window.wootQuery;
     
@@ -15,6 +15,7 @@
         init: function(selector) {
             selector = selector || document;
             
+            simpleExpr = /^[#\.]?[\w-]+$/;
             text = /[\w-]+/;
             tagElement = /^[A-Za-z]+$/;
             idElement = /^#[\w-]+$/;
@@ -23,32 +24,40 @@
             // Check if given DOM node
             if(selector.nodeType) {
                 this.elements = [selector]
-            // Check if given ID
-            } else if(selector.match(idElement)) {
-                elementName = selector.match(text)[0];
-                this.elements = [document.getElementById(elementName)];
-            // Check if given class
-            } else if(selector.match(classElement)) {
-                elementName = selector.match(text)[0];
-                classExp = new RegExp("\\b"+elementName+"\\b");
-                nodeList = document.getElementsByClassName(elementName);
-                elementList = []
-                for(var i=0; i<nodeList.length; i++) {
-                    elementList.push(nodeList[i]);
+            // Check if a simple selector
+            } else if(selector.match(simpleExpr)) {
+                // Check if given ID
+                if(selector.match(idElement)) {
+                    elementName = selector.match(text)[0];
+                    this.elements = [document.getElementById(elementName)];
+                // Check if given class
+                } else if(selector.match(classElement)) {
+                    elementName = selector.match(text)[0];
+                    classExp = new RegExp("\\b"+elementName+"\\b");
+                    nodeList = document.getElementsByClassName(elementName);
+                    elementList = []
+                    for(var i=0; i<nodeList.length; i++) {
+                        elementList.push(nodeList[i]);
+                    }
+                    this.elements = elementList;
+                // Check if given HTML tag
+                } else if(selector.match(tagElement)) {
+                    elementName = selector.match(text)[0];
+                    nodeList = document.getElementsByTagName(elementName);
+                    elementList = []
+                    for(var i=0; i<nodeList.length; i++) {
+                        elementList.push(nodeList[i]);
+                    }
+                    this.elements = elementList;
+                // Unrecognized selector
+                } else {
+                    alert("Selector not recognized: " + selector);
                 }
-                this.elements = elementList;
-            // Check if given HTML tag
-            } else if(selector.match(tagElement)) {
-                elementName = selector.match(text)[0];
-                nodeList = document.getElementsByTagName(elementName);
-                elementList = []
-                for(var i=0; i<nodeList.length; i++) {
-                    elementList.push(nodeList[i]);
-                }
-                this.elements = elementList;
-            // TODO: Implement complex selectors, e.g. "#foo > .bar"
+            // This is a complex selector
             } else {
-                alert("Selector not recognized: %s",selector);
+                selectorItems = selector.split(' ');
+                alert(selectorItems);
+                alert("Complex selector not implemented: " + selector);
             }
             
             return this;
@@ -78,7 +87,7 @@
             });
         },
         
-        //classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
+        // classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the node
         addClass: function(classNames) {
             this.elements.map(function(element) {
                 var getClass = element.getAttribute("class");
@@ -90,8 +99,8 @@
             });
         },
         
-        //see if className is a class attribute
-        //returns true if the specified class is present in at least one of the matched elements
+        // See if className is a class attribute
+        // Returns true if the specified class is present in at least one of the matched elements
         hasClass: function(className) {
             var bool = false;
             this.elements.map(function(element) {
@@ -99,7 +108,7 @@
                 if (getClass != "" && getClass != null ) {
                     var splitClass = getClass.split(" ");
                     if (splitClass.indexOf(className) != -1) {
-                        //class is found
+                        // Class is found
                         bool = true;
                     }
                 }
@@ -107,11 +116,11 @@
             return bool;
         },
         
-        //removes the specified classes from the matched elements
-        //removes all classes if no argument given
+        // Removes the specified classes from the matched elements
+        // Removes all classes if no argument given
         removeClass: function(classNames) {
             if (classNames == null) {
-                //remove all classes
+                // Remove all classes
                 this.elements.map(function(element) {
                     element.setAttribute("class", "");
                 });
@@ -124,24 +133,24 @@
                         var newClass = [];
                         var i = 0;
                         for (i=0; i<splitClass.length; i++) {
-                            //only add in classes not specified by the argument
+                            // Only add in classes not specified by the argument
                             if (classNamesSplit.indexOf(splitClass[i]) == -1) {
                             newClass.push(splitClass[i]);
                             }
                         }
-                        //set the class to be the new class list that doesn't include the argument classes
+                        // Set the class to be the new class list that doesn't include the argument classes
                         element.setAttribute("class", newClass.join(" "));
                     }
                 });            
             }
         },
         
-        //return the given attribute of the first matched element
+        // Return the given attribute of the first matched element
         attr: function(name) {
             return this.elements[0].getAttribute(name);
         },
         
-        //set a single property to a value on all the matched elements
+        // Set a single property to a value on all the matched elements
         setAttr: function(key, value) {
             this.elements.map(function(element) {
                 element.setAttribute(key, value);
