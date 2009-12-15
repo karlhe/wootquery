@@ -140,6 +140,13 @@
             alert("All your base, are belong to us!");
         },
         
+        // Executes fn when page is done loading
+        // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
+        ready: function(fn) {
+            window.onload = function() { fn(); }
+            return this;
+        },
+        
         // Returns the innerHTML of the first matched element
         html: function() {
             return this.elements[0].innerHTML;
