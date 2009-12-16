@@ -249,6 +249,30 @@
             return this;
         },
         
+        // Set CSS styling of an element
+        css: function(name,value) {        
+            // Set a style
+            if(value) {
+                this.elements.map(function(element) {
+                    element.style[name] = value;
+                });
+                return this;
+            
+            // Display a style
+            } else if(typeof(name) == 'string') {
+                return this.elements[0].style[name];
+            
+            // Merge key/value pairs
+            } else {
+                for(var key in name) {
+                    this.elements.map(function(element) {
+                        element.style[key] = name[key];
+                    });
+                }
+                return this;
+            }
+        },
+        
         //insert content after each of the matched elements
         //content is a html string
         after: function(content) {
@@ -269,25 +293,25 @@
             return this;
         },
         
-         /**
-                    //wrap each matched element with the html content
-                    //content is a html string
-                    wrapHTML: function(html) {
-                        domContent = html2dom(html);
-                        this.elements.map(function(element) {
-                            element.parentNode.replaceChild(domContent,element);
-                            domContent.appendChild(element);
-                        });
-                    },
-                    
-                    //wrap each matched element with the specified dom element (in dom format, not string)
-                    wrapElem: function(elem) {
-                        this.elements.map(function(element) {
-                            element.parentNode.replaceChild(elem, element);
-                            elem.appendChild(element);
-                        });
-                    },
-                    **/
+        /**
+        //wrap each matched element with the html content
+        //content is a html string
+        wrapHTML: function(html) {
+            domContent = html2dom(html);
+            this.elements.map(function(element) {
+                element.parentNode.replaceChild(domContent,element);
+                domContent.appendChild(element);
+            });
+        },
+        
+        //wrap each matched element with the specified dom element (in dom format, not string)
+        wrapElem: function(elem) {
+            this.elements.map(function(element) {
+                element.parentNode.replaceChild(elem, element);
+                elem.appendChild(element);
+            });
+        },
+        **/
                     
         //wrap each matched element with the specified content
         //content can either be an html string or dom element
