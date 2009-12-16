@@ -258,12 +258,13 @@
                 });
                 return this;
             
-            // Display a style
+            // Display a style for the first element
             } else if(typeof(name) == 'string') {
                 return this.elements[0].style[name];
             
             // Merge key/value pairs
             } else {
+                // This loops through all has keys of "name", which is actually a hash
                 for(var key in name) {
                     this.elements.map(function(element) {
                         element.style[key] = name[key];
