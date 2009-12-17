@@ -236,6 +236,34 @@
             return this;
         },
         
+        //for each matched element, add the specified class if not present; remove class if it is. 
+        toggleClass: function(className) {
+            this.elements.map(function(element) {
+                var getClass = element.getAttribute("class");
+                if (getClass == "" || getClass == null) {
+                    //class attribute doesn't exist. add one in with the specified class
+                    element.setAttribute("class", className);
+                } else {
+                    var splitClass = getClass.split(" ");
+                    if (splitClass.indexOf(className) == -1) {
+                        //specified class not found. append it to the list of classes
+                        element.setAttribute("class", getClass + ' ' + className);
+                    } else {
+                        //class is found. remove it.
+                        var newClass = [];
+                        for (index in splitClass) {
+                            //only add in classes not specified by the argument
+                            if (splitClass[index] != className) {
+                                newClass.push(splitClass[index]);
+                            }
+                        }
+                        element.setAttribute("class", newClass.join(" "));
+                    }
+                }
+            });
+            return this;
+        },
+        
         // Return the given attribute of the first matched element
         attr: function(name) {
             return this.elements[0].getAttribute(name);
@@ -245,6 +273,14 @@
         setAttr: function(key, value) {
             this.elements.map(function(element) {
                 element.setAttribute(key, value);
+            });
+            return this;
+        },
+        
+        //remove an attribute from each of the matched elements
+        removeAttr: function(name) {
+            this.elements.map(function(element) {
+                element.removeAttribute(name);
             });
             return this;
         },
