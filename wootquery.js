@@ -382,6 +382,61 @@
             return this;
         },
         
+        /************************************
+            EVENT HANDLERS
+        ************************************/
+        
+        click: function(fn) {
+            this.elements.map(function(element) {
+                // Executes a function when element is clicked
+                if(fn) {
+                    element.addEventListener('click',fn,false);
+                    
+                // Triggers the click function of an element
+                } else {
+                    // TODO: No idea how to do this.
+                }
+            });
+            return this;
+        },
+
+        dblclick: function(fn) {
+            this.elements.map(function(element) {
+                // Executes a function when element is double-clicked
+                if(fn) {
+                    element.addEventListener('dblclick',fn,false);
+                    
+                // Triggers the dblclick function of an element
+                } else {
+                    // TODO: No idea how to do this.
+                }
+            });
+            return this;
+        },
+        
+        // Executes a function when mouse moves over an element
+        mouseover: function(fn) {
+            this.elements.map(function(element) {
+                element.addEventListener('mouseover',fn,false);
+            });
+            return this;
+        },
+        
+        // Executes a function when mouse moves out of an element
+        mouseout: function(fn) {
+            this.elements.map(function(element) {
+                element.addEventListener('mouseout',fn,false);
+            });
+            return this;
+        },
+        
+        // Combination of mouseover and mouseout
+        hover: function(over,out) {
+            this.mouseover(over);
+            this.mouseout(out);
+            return this;
+        }
+        
  
     }
     // Allow access to wootQuery.prototype methods
