@@ -493,14 +493,7 @@
             this.elements = matchedElement;
             return this;
         },
-        
-        //add more elements, matched by the selector, to the set of matched elements
-        add: function(selector) {
-            wootQuery2 = new wootQuery.fn.init(selector);
-            this.elements = this.elements.concat(wootQuery2.elements);
-            return this;
-        },
-        
+                
         //selects a subset of the matched elements, specified by the start and end indices of the set of matched elements
         slice: function(start, end) {
             matchedElements = [];
@@ -556,6 +549,58 @@
                 }
             }
             this.elements = matchedElements;
+            return this;
+        },
+        
+        //checks if at least one of the matched elements matches the given selector. returns true or false
+        is: function(selector) {
+            wootQuery2 = new wootQuery.fn.init(selector);
+            for (index in this.elements) {
+                if (wootQuery2.elements.indexOf(this.elements[index]) != -1) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        
+        //add more elements, matched by the selector, to the set of matched elements
+        add: function(selector) {
+            wootQuery2 = new wootQuery.fn.init(selector);
+            this.elements = this.elements.concat(wootQuery2.elements);
+            return this;
+        },
+        
+        //get the set of elements containing all of the children of the set of matched elements                                                <----------------DUNNO HOW TO DO. also check for null
+        children: function() {
+            childElements = [];
+            this.elements.map(function(element) {
+                childElements.concat(element.childNodes);
+                alert(element.childNodes[0].nodeName);
+            });
+            this.elements = childElements;
+            return this;
+        }, 
+        
+        //get the parent elements of each of the matched elements
+        parent: function() {
+            parentElements = [];
+            this.elements.map(function(element) {
+                if (element.parentNode) {
+                    parentElements.push(element.parentNode);
+                }
+            });
+            this.elements = parentElements;
+            return this;
+        },
+        
+        next: function() {
+            siblingElements = [];
+            this.elements.map(function(element) {
+                if (element.nextSibling) {
+                    siblingElements.push(element.nextSibling);
+                }
+            });
+            this.elements = siblingElements;
             return this;
         },
         
