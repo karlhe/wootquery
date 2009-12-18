@@ -131,7 +131,7 @@
                 }
                 this.elements = currentNodes;
             }
-            this.selector = selector;
+            //this.selector = selector;
             return this;
         },
         
@@ -329,27 +329,7 @@
             });  
             return this;
         },
-        
-        /**
-        //wrap each matched element with the html content
-        //content is a html string
-        wrapHTML: function(html) {
-            domContent = html2dom(html);
-            this.elements.map(function(element) {
-                element.parentNode.replaceChild(domContent,element);
-                domContent.appendChild(element);
-            });
-        },
-        
-        //wrap each matched element with the specified dom element (in dom format, not string)
-        wrapElem: function(elem) {
-            this.elements.map(function(element) {
-                element.parentNode.replaceChild(elem, element);
-                elem.appendChild(element);
-            });
-        },
-        **/
-                    
+                            
         //wrap each matched element with the specified content
         //content can either be an html string or dom element
         wrap: function(content) {
@@ -387,7 +367,6 @@
         //replaces all matched elements with specified html or dom elements
         //returns wootQuery object that was replaced, which has been removed from the dom                                           
         replaceWith: function(content) {
-            oldWootQueryObj = new wootQuery.fn.init(this.selector);
             if (typeof content == "string") {
                 //input is an html string
                 domContent = html2dom(content);
@@ -398,7 +377,7 @@
             this.elements.map(function(element) {
                 element.parentNode.replaceChild(domContent, element);
             });
-            return oldWootQueryObj;
+            return this;
         },
         
         //remove child nodes of each of the matched elements
@@ -417,6 +396,11 @@
                 element.parentNode.removeChild(element);
             });
             return this;
+        },
+        
+        clone: function() {
+            
+        
         },
         
         /************************************
