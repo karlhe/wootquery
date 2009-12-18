@@ -29,9 +29,9 @@
 === Attr ===
 || Command || Implemented? ||
 || attr(name) || Yes ||
-|| setAttr(key,value)* || Yes ||
+|| setAttr(key,value)`*` || Yes ||
 || removeAttr(name) || Yes ||
-* This departs from the way jQuery does attr()
+`*` This departs from the way jQuery does attr()
 
 === Class ===
 || Command || Implemented? ||
@@ -95,10 +95,10 @@
 || Command || Implemented? ||
 || click() || Yes ||
 || click(fn) || Yes ||
-|| dblclick() || No* ||
+|| dblclick() || No`*` ||
 || dblclick(fn) || Yes ||
 || mouseover(fn) || Yes ||
 || mouseout(fn) || Yes ||
 
 
-* See notes in JS file
+`*` See notes in JS file
