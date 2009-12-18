@@ -29,4 +29,6 @@ $(document).ready(function() {
             $(this).css('fontWeight','normal');
         }
     );
+    
+    $('ul').find('li:last').css('background','#dfd');
 });

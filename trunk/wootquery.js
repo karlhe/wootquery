@@ -24,71 +24,70 @@
         return div.innerHTML;
     }
     
+    simpleExpr = /^([#\.])?([\w-]+)(:[\w-]+)?$/;
+    function fetchElement(node,selector,type) {
+        elementList = [];
+        expr = selector.match(simpleExpr);
+        
+        // Check if given ID
+        if(expr[1] == '#') {
+            elementName = expr[2];
+            elementList.push(node.getElementById(elementName));
+        // Check if given class
+        } else if(expr[1] == '.') {
+            elementName = expr[2];
+            classExp = new RegExp("\\b"+elementName+"\\b");
+            nodeList = node.getElementsByClassName(elementName);
+            for(var i=0; i<nodeList.length; i++) {
+                elementList.push(nodeList[i]);
+            }
+        // Check if given HTML tag
+        } else if(expr[1] == null) {
+            elementName = expr[2];
+            nodeList = node.getElementsByTagName(elementName);
+            for(var i=0; i<nodeList.length; i++) {
+                elementList.push(nodeList[i]);
+            }
+        }
+        
+        // Select only the first element found
+        if(expr[3] == ':first') {
+            elementList = [elementList[0]];
+        
+        // Select only the last element found
+        } else if(expr[3] == ':last') {
+            elementList = [elementList[elementList.length-1]];
+        }
+        
+        
+        // Child selector
+        if(type == '>') {
+            returnList = [];
+            while(elementList.length > 0) {
+                element = elementList.shift();
+                for(var i=0; i<node.childNodes.length; i++) {
+                    if(node.childNodes[i] == element) {
+                        returnList.push(element);
+                        break;
+                    }
+                }
+            }
+            return returnList;
+            
+        // Ancestor selector
+        } else {
+            return elementList;
+        }
+        
+    }
+    
     // Define methods for the wootQuery prototype
     wootQuery.fn = wootQuery.prototype = {
         // Establish the state of the wootQuery instance
         
         init: function(selector) {
             selector = selector || document;
-            
-            simpleExpr = /^([#\.])?([\w-]+)(:[\w-]+)?$/;
-            
-            function fetchElement(node,selector,type) {
-                elementList = [];
-                expr = selector.match(simpleExpr);
-                
-                // Check if given ID
-                if(expr[1] == '#') {
-                    elementName = expr[2];
-                    elementList.push(node.getElementById(elementName));
-                // Check if given class
-                } else if(expr[1] == '.') {
-                    elementName = expr[2];
-                    classExp = new RegExp("\\b"+elementName+"\\b");
-                    nodeList = node.getElementsByClassName(elementName);
-                    for(var i=0; i<nodeList.length; i++) {
-                        elementList.push(nodeList[i]);
-                    }
-                // Check if given HTML tag
-                } else if(expr[1] == null) {
-                    elementName = expr[2];
-                    nodeList = node.getElementsByTagName(elementName);
-                    for(var i=0; i<nodeList.length; i++) {
-                        elementList.push(nodeList[i]);
-                    }
-                }
-                
-                // Select only the first element found
-                if(expr[3] == ':first') {
-                    elementList = [elementList[0]];
-                
-                // Select only the last element found
-                } else if(expr[3] == ':last') {
-                    elementList = [elementList[-1]];
-                }
-                
-                
-                // Child selector
-                if(type == '>') {
-                    returnList = [];
-                    while(elementList.length > 0) {
-                        element = elementList.shift();
-                        for(var i=0; i<node.childNodes.length; i++) {
-                            if(node.childNodes[i] == element) {
-                                returnList.push(element);
-                                break;
-                            }
-                        }
-                    }
-                    return returnList;
-                    
-                // Ancestor selector
-                } else {
-                    return elementList;
-                }
-                
-            }
-            
+                        
             // Check if given DOM node
             if(selector.nodeType) {
                 this.elements = [selector]
@@ -159,9 +158,18 @@
             }
         },
         
+        find: function(expr) {
+            newElements = [];
+            this.elements.map(function(element) {
+                newElements = newElements.concat(fetchElement(element,expr));
+            });
+            this.elements = newElements;
+            return this;
+        },
+        
         //for checking if an object is a wootQuery object
         isWootQuery: true,
-
+        
         // Executes fn when page is done loading
         // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
         ready: function(fn) {
