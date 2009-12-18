@@ -5,6 +5,8 @@
 || get() || Yes ||
 || get(index) || Yes ||
 
+
+---
 == Selectors ==
 
 === Basic ===
@@ -24,6 +26,7 @@
 || :last || Yes ||
 
 
+---
 == Attributes ==
 
 === Attr ===
@@ -40,11 +43,14 @@
 || removeClass(class) || Yes ||
 || toggleClass(class) || Yes ||
 
+
+---
 == Traversing ==
 
 (FINISH THIS)
 
 
+---
 == Manipulation ==
 
 === Changing Contents ===
@@ -71,7 +77,7 @@
 || clone() || Yes ||
 
 
-
+---
 == CSS ==
 
 === CSS ===
@@ -81,6 +87,7 @@
 || css(name,value) || Yes ||
 
 
+---
 == Events ==
 
 === Page Load ===
