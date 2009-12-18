@@ -31,7 +31,7 @@
         init: function(selector) {
             selector = selector || document;
             
-            simpleExpr = /^([#\.])?([\w-]+)$/;
+            simpleExpr = /^([#\.])?([\w-]+)(:[\w-]+)?$/;
             
             function fetchElement(node,selector,type) {
                 elementList = [];
@@ -56,6 +56,12 @@
                     for(var i=0; i<nodeList.length; i++) {
                         elementList.push(nodeList[i]);
                     }
+                }
+                
+                if(expr[3] == ':first') {
+                    elementList = [elementList[0]];
+                } else if(expr[3] == ':last') {
+                    elementList = [elementList[-1]];
                 }
                 
                 // Child selector
