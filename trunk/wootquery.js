@@ -138,9 +138,20 @@
             alert("All your base, are belong to us!");
         },
         
+        get: function(index) {
+            // Returns element at "index" of "elements"
+            if(typeof(index) == 'number') {
+                return this.elements[index];
+                
+            // Returns all elements
+            } else {
+                return this.elements;
+            }
+        },
+        
         //for checking if an object is a wootQuery object
         isWootQuery: true,
-        
+
         // Executes fn when page is done loading
         // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
         ready: function(fn) {

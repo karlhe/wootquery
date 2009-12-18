@@ -1,5 +1,7 @@
 // This code should be executed when the DOM is ready
 $(document).ready(function() {
+    woot = $('#woot').clone().get(0);
+    $('#clone').replaceWith(woot);
     $('p').append("ain't it?");
     $('p').css('background','#fcc');    // Set BG color of <p> to #fcc
     bg = $('p').css('background');      // Store current background color of <p> into variable bg
