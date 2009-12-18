@@ -32,9 +32,8 @@
 === Attr ===
 || Command || Implemented? ||
 || attr(name) || Yes ||
-|| setAttr(key,value)`*` || Yes ||
+|| attr(key,value) || Yes ||
 || removeAttr(name) || Yes ||
-`*` This departs from the way jQuery does attr()
 
 === Class ===
 || Command || Implemented? ||
