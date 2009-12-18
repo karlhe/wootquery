@@ -17,7 +17,7 @@
     <p>Fine weather we're having, </p>
     <ul>
       <li><a href="#" onClick="javascript:$().capture();">Click me!</a></li>
-      <li><a href="#" onClick="javascript:this.innerHTML = $(woot).html();">Modify by Element!</a></li>
+      <li id="ownage"><a href="#" id="pwnage" onClick="javascript:this.innerHTML = $(woot).html();">Modify by Element!</a></li>
       <li><a href="#" onClick="javascript:this.innerHTML = $('#woot').html();">Modify by ID!</a></li>
       <li><a href="#" onClick="javascript:$(woot).append(' <b>I be appended!</b>');">Modify #woot!</a></li>
       <li><a href="#" onClick="javascript:$('li').append(' <b>List element!</b>');">Modify list items</a></li>
@@ -50,7 +50,6 @@
       //$('#woot').empty().append("sup");  
       //$('#woot').remove();
       //$('#sup').append($('#woot').remove().html());
-
          //$('#woot').removeAttr("class");
          //alert($('#woot').attr("class"));
       //$('#sup').prepend($('i').clone());  
@@ -62,6 +61,18 @@
       //$('#woot').add('#sup').append("<i>double-kill!</i>");
       //$('li').slice(1).append("BOOOOYYAAAHHH");
       //$('li').slice(1,5).append("BOOOOYYAAAHHH");
+      //$('a').not("#pwnage").append("YEAH!");
+      //$('li').filter('#ownage').append("WORKS!");
+      /**
+                 $('li').filter(function(element){
+                    if(element.getAttribute("id")){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                  }).append("WORKS!");
+             /**
+             
     </script>
   </body>
 </html>
