@@ -471,7 +471,26 @@
                     
                 // Triggers the click function of an element
                 } else {
-                    // TODO: No idea how to do this.
+                    // I'm not sure about browser compatibility of this:
+                    evt = document.createEvent('MouseEvents'); 
+                    evt.initMouseEvent(
+                    'click',
+                    true,     // Click events bubble
+                    true,     // and they can be cancelled
+                    document.defaultView,  // Use the default view
+                    1,        // Just a single click
+                    0,        // Don't bother with co-ordinates
+                    0,
+                    0,
+                    0,
+                    false,    // Don't apply any key modifiers
+                    false,
+                    false,
+                    false,
+                    0,        // 0 - left, 1 - middle, 2 - right
+                    null);    // Click events don't have any targets other than
+                             // the recipient of the click
+                    element.dispatchEvent(evt);
                 }
             });
             return this;
@@ -485,7 +504,7 @@
                     
                 // Triggers the dblclick function of an element
                 } else {
-                    // TODO: No idea how to do this.
+                    // TODO: No idea how to do this
                 }
             });
             return this;
