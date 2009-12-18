@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+  "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Example 3</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      div {
+        margin: 1em;
+        padding: 5px;
+        border: 1px solid #ddd;
+      }
+      .woot{
+        color: #f00;
+      }
+      #third-div {
+        height: 3em;
+      }
+    </style>
+    <script type="text/javascript" src="wootquery.js"></script>
+    <script type="text/javascript">
+      // jQuery Input:
+      $(document).ready(function(){
+        $("li").hover(
+          function () {
+            $(this).append($("<span class='woot'> Double-click me to make me disappear forever!</span>"));
+          },
+          function () {
+            $(this).find("span:last").remove();
+          }
+        );
+        $("li").dblclick(function(){
+          $(this).slideUp();
+        });          
+        $("p#p1").click(function(){
+           $(this).text("Saung: \"I'm cool!\"").next("p").text("Karl: \"And I'm not :(\"");
+        });
+        $("p#p2").click(function(){
+          $(this).text("Karl: \"I'm cool now!\"").prev("p").text("Saung: \"Now I'm not :(\"");
+        });
+        $("p#p1").hover(
+          function(){
+              $(this).append($("<span class='woot'> Click me to make Saung cool and Karl not!</span>"));
+          },
+          function(){
+              $(this).find("span:last").remove();
+          }
+        );
+        $("p#p2").hover(
+          function(){
+              $(this).append($("<span class='woot'> Click me to make Karl cool and Saung not!</span>"));
+          },
+          function(){
+              $(this).find("span:last").remove();
+          }
+        );
+        $("#third-div").hover(
+          function(){
+              $("p#p3").fadeOut("slow");
+          },
+          function(){
+              $("p#p3").fadeIn("slow");
+          }
+        );                  
+      });
+        
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to the Show</h1>
+    <p> Hover over the text below to see what you can do!</p>
+    <div id="first-div">
+      <p id = "p1"> Saung: "Welcome!" </p>
+      <p id="p2"> Karl: "Welcome!" </p>
+    </div>
+    <div id="second-div">
+      <ul>
+        <li>This list is in <code>#second-div</code>.</li>
+        <li class="second">This list element has class <code>.second</code>.</li>
+        <li>Welcome to the Show!</li>
+        <li>What's in your wallet?</li>
+      </ul>
+    </div>
+    <div id="third-div">
+        <p id="p3">Hover over me to make me fade away! </p>
+    </div>
+  </body>
+</html>

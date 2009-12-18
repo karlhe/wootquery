@@ -21,7 +21,6 @@ $(document).ready(function() {
     $('p').dblclick(function() {
         $('p').append("!");
     });
-    $('p').dblclick();
     
     $('div').hover(
         function() {
