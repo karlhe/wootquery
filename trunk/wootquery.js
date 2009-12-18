@@ -30,30 +30,27 @@
         init: function(selector) {
             selector = selector || document;
             
-            simpleExpr = /^[#\.]?[\w-]+$/;
-            text = /[\w-]+/;
-            tagElement = /^[A-Za-z]+$/;
-            idElement = /^#[\w-]+$/;
-            classElement = /^\.[\w-]+$/;
+            simpleExpr = /^([#\.])?([\w-]+)$/;
             
             function fetchElement(node,selector,type) {
                 elementList = [];
+                expr = selector.match(simpleExpr);
                 
                 // Check if given ID
-                if(selector.match(idElement)) {
-                    elementName = selector.match(text)[0];
+                if(expr[1] == '#') {
+                    elementName = expr[2];
                     elementList.push(node.getElementById(elementName));
                 // Check if given class
-                } else if(selector.match(classElement)) {
-                    elementName = selector.match(text)[0];
+                } else if(expr[1] == '.') {
+                    elementName = expr[2];
                     classExp = new RegExp("\\b"+elementName+"\\b");
                     nodeList = node.getElementsByClassName(elementName);
                     for(var i=0; i<nodeList.length; i++) {
                         elementList.push(nodeList[i]);
                     }
                 // Check if given HTML tag
-                } else if(selector.match(tagElement)) {
-                    elementName = selector.match(text)[0];
+                } else if(expr[1] == null) {
+                    elementName = expr[2];
                     nodeList = node.getElementsByTagName(elementName);
                     for(var i=0; i<nodeList.length; i++) {
                         elementList.push(nodeList[i]);
@@ -457,8 +454,7 @@
             this.mouseout(out);
             return this;
         }
-        
- 
+
     }
     // Allow access to wootQuery.prototype methods
     wootQuery.fn.init.prototype = wootQuery.fn;
