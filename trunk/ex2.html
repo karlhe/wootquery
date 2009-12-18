@@ -26,7 +26,39 @@
         background: #ddd;
         color: #000;
         font-family: Consolas, "Courier New", Courier, monospace;
-        font-size: 9  0%;
+        font-size: 90%;
+      }
+      .styled {
+        background: #363;
+        font-family: Calibri,Verdana,Tahoma,sans-serif;
+      }
+      .styled h1 {
+        background: transparent;
+        color: #fff;
+        text-align: center;
+      }
+      .styled div {
+        border: 10px solid #000;
+        padding: 20px;
+        background: #fff;
+        width: 700px;
+        margin: 20px auto;
+      }
+      .styled .highlight {
+        background: #9c9;
+      }
+      .styled a:link, .styled a:visited {
+        background: transparent;
+        color: #060;
+        font-weight: bold;
+      }
+      .styled a:hover {
+        background: #060;
+        color: #fff;
+      }
+      .styled h2 {
+        margin-top: 0;
+        border-bottom: 2px solid #030;
       }
     </style>
     <script type="text/javascript" src="wootquery.js"></script>
@@ -47,31 +79,42 @@
       itemCount = 1;
       function addItem(target){
         $(target).append("<li>This is element #"+itemCount+"</li>");
+        $(target).find('li').css('fontWeight','normal');
+        $(target).find('li:last').css('fontWeight','bold');
         itemCount++;
+      }
+      function changeTitle(text){
+        $('h1').html(text);
       }
     </script>
   </head>
   <body>
-    <h1>Welcome to the Show</h1>
+    <h1>Good evening, gentlemen.</h1>
     <div id="first-div">
       <h2>#first-div</h2>
       <p>This example focuses on <abbr title="Cascading Style Sheets">CSS</abbr> and content manipulation.</p>
       <p>This text is in a paragraph in <code>#first-div</code>.</p>
-      <p><a href="#show-second" onClick="javascript:showSecond();">Click here</a> to toggle <code>#second-div</code></p>
+      <p><a href="#change-title" onClick="changeTitle('Good evening, ladies.')">Wrong audience?</a></p>
+      <p><a href="#show-second" onClick="showSecond();">Click here</a> to toggle <code>#second-div</code></p>
     </div>
     <div id="second-div" class="hidden">
       <h2>#second-div</h2>
       <ul>
         <li>This list is in <span class="code">#second-div</span>.</li>
         <li class="second">This list element has class <span class="code">.second</span>.</li>
-        <li>Make <code>#first-div</code> <a href="#make-blue" onClick="javascript:makeBlue();">blue!</a></li>
-        <li>Highlight, <a href="#highlight" onClick="javascript:highlight();">ACTIVATE</a></li>
-        <li>Make me <a href="#grow" onClick="javascript:grow(this);">GROW: </a></li>
-        <li><a href="#add-li" onClick="javascript:addItem('#add-to-me');">Add</a> a subpoint:
+        <li>Make <code>#first-div</code> <a href="#make-blue" onClick="makeBlue();">blue!</a></li>
+        <li>Highlight, <a href="#highlight" onClick="highlight();">ACTIVATE</a></li>
+        <li>Make me <a href="#grow" onClick="grow(this);">GROW: </a></li>
+        <li><a href="#add-li" onClick="addItem('#add-to-me');">Add</a> a subpoint:
           <ul id="add-to-me">
           </ul>
         </li>
       </ul>
+    </div>
+    <div id="third-div">
+      <h2>#third-div</h2>
+      <p><a href="#remove-titles" onClick="$('h2').remove()">Remove Titles</a></p>
+      <p><a href="#stylize" onClick="$('body').toggleClass('styled');">Stylize Page!</a></p>
     </div>
   </body>
 </html>
