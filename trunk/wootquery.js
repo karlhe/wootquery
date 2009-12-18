@@ -581,10 +581,8 @@
         children: function() {
             childElements = [];
             this.elements.map(function(element) {
-                for(var n in element.childNodes) {
-                    if(element.childNodes[n].nodeName && element.childNodes[n].nodeName != '#text') {
-                        childElements.push(element.childNodes[n]);
-                    }
+                for (index in element.children) {
+                    childElements.push(element.children[index]);
                 }
             });
             this.elements = childElements;
