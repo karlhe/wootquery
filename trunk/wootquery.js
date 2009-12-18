@@ -600,7 +600,7 @@
             return this;
         }, 
         
-        //get the parent elements of each of the matched elements
+        //get the set of the parent elements of each of the matched elements
         parent: function() {
             parentElements = [];
             this.elements.map(function(element) {
@@ -612,15 +612,44 @@
             return this;
         },
         
+        //get the set of next siblings of each of the matched elements
         next: function() {
             siblingElements = [];
             this.elements.map(function(element) {
-                if (element.nextSibling) {
-                    siblingElements.push(element.nextSibling);
+                var nxtSibling = element.nextSibling;
+                while (nxtSibling) {
+                    if (nxtSibling.nodeType == 1) {
+                        siblingElements.push(nxtSibling);
+                        break;
+                    } else {
+                        nxtSibling = nxtSibling.nextSibling;
+                    }
                 }
             });
             this.elements = siblingElements;
             return this;
+        },
+        
+        //get the set of previous siblings of each of the matched elements
+        prev: function() {
+            siblingElements = [];
+            this.elements.map(function(element) {
+                var prevSibling = element.previousSibling;
+                while (prevSibling) {
+                    if (prevSibling.nodeType == 1) {
+                        siblingElements.push(prevSibling);
+                        break;
+                    } else {
+                        prevSibling = prevSibling.previousSibling;
+                    }
+                }
+            });
+            this.elements = siblingElements;
+            return this;            
+        },
+        
+        siblings: function() {
+        
         },
         
         /************************************
