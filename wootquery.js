@@ -570,12 +570,15 @@
             return this;
         },
         
-        //get the set of elements containing all of the children of the set of matched elements                                                <----------------DUNNO HOW TO DO. also check for null
+        //get the set of elements containing all of the children of the set of matched elements
         children: function() {
             childElements = [];
             this.elements.map(function(element) {
-                childElements.concat(element.childNodes);
-                alert(element.childNodes[0].nodeName);
+                for(var n in element.childNodes) {
+                    if(element.childNodes[n].nodeName && element.childNodes[n].nodeName != '#text') {
+                        childElements.push(element.childNodes[n]);
+                    }
+                }
             });
             this.elements = childElements;
             return this;
