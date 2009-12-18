@@ -131,7 +131,7 @@
                 }
                 this.elements = currentNodes;
             }
-            
+            this.selector = selector;
             return this;
         },
         
@@ -385,8 +385,9 @@
         },
         
         //replaces all matched elements with specified html or dom elements
-        //returns wootQuery object that was replaced, which has been removed from the dom                                                <--------- IMPLEMENT THIS PART!!!!!!!!!!!!!!!!!!!!!!!
+        //returns wootQuery object that was replaced, which has been removed from the dom                                           
         replaceWith: function(content) {
+            oldWootQueryObj = new wootQuery.fn.init(this.selector);
             if (typeof content == "string") {
                 //input is an html string
                 domContent = html2dom(content);
@@ -397,7 +398,7 @@
             this.elements.map(function(element) {
                 element.parentNode.replaceChild(domContent, element);
             });
-        
+            return oldWootQueryObj;
         },
         
         //remove child nodes of each of the matched elements
