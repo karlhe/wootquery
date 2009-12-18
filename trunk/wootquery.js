@@ -139,7 +139,7 @@
                 }
                 this.elements = currentNodes;
             }
-            //this.selector = selector;
+            this.selector = selector;
             return this;
         },
         
@@ -147,6 +147,9 @@
         capture: function() {
             alert("All your base, are belong to us!");
         },
+        
+        //for checking if an object is a wootQuery object
+        isWootQuery: true,
         
         get: function(index) {
             // Returns element at "index" of "elements"
@@ -159,6 +162,13 @@
             }
         },
         
+        //returns the number of elements in the wootQuery object
+        size: function() {
+            return this.elements.length;
+        },
+        
+        selector: this.selector,
+        
         find: function(expr) {
             newElements = [];
             this.elements.map(function(element) {
@@ -167,10 +177,7 @@
             this.elements = newElements;
             return this;
         },
-        
-        //for checking if an object is a wootQuery object
-        isWootQuery: true,
-        
+                
         // Executes fn when page is done loading
         // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
         ready: function(fn) {
