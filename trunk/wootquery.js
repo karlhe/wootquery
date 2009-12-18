@@ -177,7 +177,18 @@
             this.elements = newElements;
             return this;
         },
-                
+        
+        // An iterator function for the matched elements
+        each: function(callback) {
+            this.elements.map(function(element) {
+                callback(element);
+            });
+            return this;
+        },
+        
+        //for checking if an object is a wootQuery object
+        isWootQuery: true,
+        
         // Executes fn when page is done loading
         // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
         ready: function(fn) {
