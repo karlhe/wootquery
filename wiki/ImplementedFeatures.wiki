@@ -71,6 +71,7 @@
 || clone() || Yes ||
 
 
+
 == CSS ==
 
 === CSS ===
@@ -78,3 +79,26 @@
 || css(name) || Yes ||
 || css(properties) || Yes ||
 || css(name,value) || Yes ||
+
+
+== Events ==
+
+=== Page Load ===
+|| Command || Implemented? ||
+|| ready(fn) || Yes ||
+
+=== Interaction Helpers ===
+|| Command || Implemented? ||
+|| hover(over,out) || Yes ||
+
+=== Event Helpers ===
+|| Command || Implemented? ||
+|| click() || Yes ||
+|| click(fn) || Yes ||
+|| dblclick() || No* ||
+|| dblclick(fn) || Yes ||
+|| mouseover(fn) || Yes ||
+|| mouseout(fn) || Yes ||
+
+
+* See notes in JS file
