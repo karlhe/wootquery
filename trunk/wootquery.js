@@ -177,21 +177,22 @@
             return this;
         },
         
-        // Returns the innerHTML of the first matched element
-        html: function() {
-            if(this.elements[0]) {
-                return this.elements[0].innerHTML;
+        html: function(val) {
+            //set the innerHTML contents of every matched element
+            if(val != null) {
+                this.elements.map(function(element) {
+                    element.innerHTML = val;
+                });
+                return this;
+            
+            // Returns the innerHTML of the first matched element
             } else {
-                return null;
+                if(this.elements[0]) {
+                    return this.elements[0].innerHTML;
+                } else {
+                    return null;
+                }
             }
-        },
-        
-        //set the innerHTML contents of every matched element
-        setHTML: function(val) {
-            this.elements.map(function(element) {
-                element.innerHTML = val;
-            });
-            return this;
         },
         
         // Appends content to innerHTML of matched elements
@@ -326,21 +327,22 @@
             return this;
         },
         
-        // Return the given attribute of the first matched element
-        attr: function(name) {
-            if (this.elements[0]) {
-                return this.elements[0].getAttribute(name);            
+        attr: function(name, value) {
+            // Set a single property to a value on all the matched elements
+            if(value != null) {
+                this.elements.map(function(element) {
+                    element.setAttribute(name, value);
+                });
+                return this;
+            
+            // Return the given attribute of the first matched element
             } else {
-                return null;
+                if (this.elements[0]) {
+                    return this.elements[0].getAttribute(name);            
+                } else {
+                    return null;
+                }
             }
-        },
-        
-        // Set a single property to a value on all the matched elements
-        setAttr: function(key, value) {
-            this.elements.map(function(element) {
-                element.setAttribute(key, value);
-            });
-            return this;
         },
         
         //remove an attribute from each of the matched elements

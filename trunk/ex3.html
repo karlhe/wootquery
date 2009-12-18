@@ -25,45 +25,48 @@
       $(document).ready(function(){
         $("li").hover(
           function () {
-            $(this).append($("<span class='woot'> Double-click me to make me disappear forever!</span>"));
+            $(this).append("<span class='woot'> Double-click me to make me disappear forever!</span>");
           },
           function () {
             $(this).find("span:last").remove();
           }
         );
         $("li").dblclick(function(){
-          $(this).slideUp();
+           $(this).remove();
         });          
-        $("p#p1").click(function(){
-           $(this).text("Saung: \"I'm cool!\"").next("p").text("Karl: \"And I'm not :(\"");
+        $("#p1").click(function(){
+           $(this).html("Saung: \"I'm cool!\"");
+           $('#p2').html("Karl: \"And I'm not :(\"");
         });
-        $("p#p2").click(function(){
-          $(this).text("Karl: \"I'm cool now!\"").prev("p").text("Saung: \"Now I'm not :(\"");
+        $("#p2").click(function(){
+           $(this).html("Karl: \"I'm cool now!\"");
+           $('#p1').html("Saung: \"Now I'm not :(\"");
         });
-        $("p#p1").hover(
+        $("#p1").hover(
           function(){
-              $(this).append($("<span class='woot'> Click me to make Saung cool and Karl not!</span>"));
+              $(this).append("<span class='woot'> Click me to make Saung cool and Karl not!</span>");
           },
           function(){
               $(this).find("span:last").remove();
           }
         );
-        $("p#p2").hover(
+        $("#p2").hover(
           function(){
-              $(this).append($("<span class='woot'> Click me to make Karl cool and Saung not!</span>"));
+              $(this).append("<span class='woot'> Click me to make Karl cool and Saung not!</span>");
           },
           function(){
               $(this).find("span:last").remove();
           }
         );
+        p3 = $("#p3");
         $("#third-div").hover(
           function(){
-              $("p#p3").fadeOut("slow");
+              $(this).html("");
           },
           function(){
-              $("p#p3").fadeIn("slow");
+              $(this).append(p3);
           }
-        );                  
+        );
       });
         
     </script>
@@ -72,15 +75,14 @@
     <h1>Welcome to the Show</h1>
     <p> Hover over the text below to see what you can do!</p>
     <div id="first-div">
-      <p id = "p1"> Saung: "Welcome!" </p>
+      <p id="p1"> Saung: "Welcome!" </p>
       <p id="p2"> Karl: "Welcome!" </p>
     </div>
     <div id="second-div">
       <ul>
-        <li>This list is in <code>#second-div</code>.</li>
-        <li class="second">This list element has class <code>.second</code>.</li>
-        <li>Welcome to the Show!</li>
-        <li>What's in your wallet?</li>
+        <li>List element 1</li>
+        <li>List element 2</li>
+        <li>List element THREE</li>
       </ul>
     </div>
     <div id="third-div">
