@@ -29,8 +29,10 @@
         $("#second").append("<h2>#second</h2>");
         $("#second").append("<ul></ul>");
         $("#second > ul").append("<li>One potato</li>");
-        $("#second > ul > li").append("<li>Two potato</li>");
-        $("ul").append("<li>I'm in two places!</li>");
+        $("#second > ul").append("<li>Two potato</li>");
+        $("ul").prepend("<li>I'm in two places!</li>");
+        $("#second > ul > li:last").append("<ul><li>Sub potato</li></ul>");
+        $("#second > ul ul").css('listStyleType','square');
         $("#first ul").append("<li>I'm not, however.</li>");
       });
     </script>

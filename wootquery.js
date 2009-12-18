@@ -24,6 +24,7 @@
         return div.innerHTML;
     }
     
+    // Given a parent node and a selector (and optional selection type), returns DOM elements
     simpleExpr = /^([#\.])?([\w-]+)(:[\w-]+)?$/;
     function fetchElement(node,selector,type) {
         elementList = [];
@@ -608,6 +609,12 @@
             });
             return this;
         },
+        
+        /*  Note for mouseover,mouseout,hover:
+        *   This does not quite work correctly when there are nested elements.
+        *   From what I can tell, this has something to do with event bubbling,
+        *   However I do not know how to fix this as of the moment.
+        */
         
         // Executes a function when mouse moves over an element
         mouseover: function(fn) {
