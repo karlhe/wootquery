@@ -32,4 +32,8 @@ $(document).ready(function() {
     
     $('ul').find('li:last').css('background','#dfd');
     
+    $('ul').children().each(function(element) {
+        element.innerHTML = "** " + element.innerHTML;
+    });
+    
 });
