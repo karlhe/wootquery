@@ -395,9 +395,15 @@
             return this;
         },
         
+        //clone the matched elements and select them
+        //note that the cloned elements don't have their parentNodes saved
         clone: function() {
-            
-        
+            clonedElements = [];
+            this.elements.map(function(element) {
+                clonedElements.push(element.cloneNode(true));
+            });
+            this.elements = clonedElements;
+            return this;
         },
         
         /************************************
