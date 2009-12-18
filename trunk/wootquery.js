@@ -518,6 +518,44 @@
             return this;
         },
         
+        //remove elements matching the selector from the list of matched elements
+        not: function(selector) {
+            matchedElements = []
+            wootQuery2 = new wootQuery.fn.init(selector);
+            for (index in this.elements) {
+                if (wootQuery2.elements.indexOf(this.elements[index]) == -1) {
+                    matchedElements.push(this.elements[index]);
+                }
+            }
+            this.elements = matchedElements;
+            return this;
+        },
+        
+        //keeps only elements from the set of matched elements that match the given argument 
+        //the argument can either be a selector or function
+        //if argument is function, keeps elements for which the function returns true
+        filter: function(arg) {
+            matchedElements = [];
+            if (typeof arg == "string") {
+                //argument is a selector
+                wootQuery2 = new wootQuery.fn.init(arg);
+                for (index in this.elements) {
+                    if (wootQuery2.elements.indexOf(this.elements[index]) != -1) {
+                        matchedElements.push(this.elements[index]);
+                    }
+                }
+            } else {
+                //argument is a function
+                for (index in this.elements) {
+                    if (arg(this.elements[index])) {
+                        matchedElements.push(this.elements[index]);
+                    }
+                }
+            }
+            this.elements = matchedElements;
+            return this;
+        },
+        
         /************************************
             EVENT HANDLERS
         ************************************/
