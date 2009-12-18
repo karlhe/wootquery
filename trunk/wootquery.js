@@ -171,7 +171,11 @@
         
         // Returns the innerHTML of the first matched element
         html: function() {
-            return this.elements[0].innerHTML;
+            if(this.elements[0]) {
+                return this.elements[0].innerHTML;
+            } else {
+                return null;
+            }
         },
         
         //set the innerHTML contents of every matched element
@@ -316,7 +320,11 @@
         
         // Return the given attribute of the first matched element
         attr: function(name) {
-            return this.elements[0].getAttribute(name);
+            if (this.elements[0]) {
+                return this.elements[0].getAttribute(name);            
+            } else {
+                return null;
+            }
         },
         
         // Set a single property to a value on all the matched elements
@@ -346,8 +354,12 @@
             
             // Display a style for the first element
             } else if(typeof(name) == 'string') {
-                return this.elements[0].style[name];
-            
+                if (this.elements[0]) {
+                    return this.elements[0].style[name];            
+                } else {
+                    return null;
+                }
+                
             // Merge key/value pairs
             } else {
                 // This loops through all has keys of "name", which is actually a hash
@@ -459,6 +471,45 @@
             return this;
         },
         
+        //reduce the set of matched elements to be the nth matched element
+        eq: function(n) {
+            matchedElement = [];
+            for (index in this.elements) {
+                if (index == n) {
+                    matchedElement.push(this.elements[index]);
+                }
+            }
+            this.elements = matchedElement;
+            return this;
+        },
+        
+        //add more elements, matched by the selector, to the set of matched elements
+        add: function(selector) {
+            wootQuery2 = new wootQuery.fn.init(selector);
+            this.elements = this.elements.concat(wootQuery2.elements);
+            return this;
+        },
+        
+        //selects a subset of the matched elements, specified by the start and end indices of the set of matched elements
+        slice: function(start, end) {
+            matchedElements = [];
+            if (end) {
+                for (index in this.elements) {
+                    if (index >= start && index <= end) {
+                        matchedElements.push(this.elements[index]);
+                    }
+                }
+            } else {
+                for (index in this.elements) {
+                    if (index >= start) {
+                        matchedElements.push(this.elements[index]);
+                    }
+                }
+            }
+            this.elements = matchedElements;
+            return this;
+        },
+        
         /************************************
             EVENT HANDLERS
         ************************************/
@@ -531,7 +582,7 @@
             this.mouseover(over);
             this.mouseout(out);
             return this;
-        }
+        },
 
     }
     // Allow access to wootQuery.prototype methods
