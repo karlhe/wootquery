@@ -95,7 +95,7 @@
 
 === Interaction Helpers ===
 || Command || Implemented? ||
-|| hover(over,out) || Yes ||
+|| hover(over,out) || Almost`*` ||
 
 === Event Helpers ===
 || Command || Implemented? ||
@@ -103,8 +103,8 @@
 || click(fn) || Yes ||
 || dblclick() || No`*` ||
 || dblclick(fn) || Yes ||
-|| mouseover(fn) || Yes ||
-|| mouseout(fn) || Yes ||
+|| mouseover(fn) || Almost`*` ||
+|| mouseout(fn) || Almost`*` ||
 
 
 `*` See notes in JS file
