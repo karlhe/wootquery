@@ -27,6 +27,7 @@
     // Define methods for the wootQuery prototype
     wootQuery.fn = wootQuery.prototype = {
         // Establish the state of the wootQuery instance
+        
         init: function(selector) {
             selector = selector || document;
             
@@ -137,6 +138,9 @@
             alert("All your base, are belong to us!");
         },
         
+        //for checking if an object is a wootQuery object
+        isWootQuery: true,
+        
         // Executes fn when page is done loading
         // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
         ready: function(fn) {
@@ -158,7 +162,21 @@
         },
         
         // Appends content to innerHTML of matched elements
+        // content can be either a wootQuery object, dom element, or html string
         append: function(content) {
+            if (typeof content == "object") {
+                if (content.isWootQuery) {
+                    //content is a wootQuery object. append all of content's elements to the matched elements
+                    var contentArr = [];
+                    content.elements.map(function(element) {
+                        contentArr.push(dom2html(element));
+                    });
+                    content = contentArr.join(" ");                
+                } else {
+                    //content is a dom element. convert it to a string
+                    content = dom2html(content);
+                }
+            } 
             this.elements.map(function(element) {
                 element.innerHTML = element.innerHTML + content;
             });
@@ -166,7 +184,21 @@
         },
         
         // Prepends content to innerHTML of matched elements
+        // content can be either a wootQuery object, dom element, or html string
         prepend: function(content) {
+            if (typeof content == "object") {
+                if (content.isWootQuery) {
+                    //content is a wootQuery object. append all of content's elements to the matched elements
+                    var contentArr = [];
+                    content.elements.map(function(element) {
+                        contentArr.push(dom2html(element));
+                    });
+                    content = contentArr.join(" ");                
+                } else {
+                    //content is a dom element. convert it to a string
+                    content = dom2html(content);
+                }
+            }            
             this.elements.map(function(element) {
                 element.innerHTML = content + element.innerHTML;
             });
