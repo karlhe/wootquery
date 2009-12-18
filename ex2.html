@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+  "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Example 2</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      div {
+        margin: 1em;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+      .hidden {
+        display: none;
+      }
+      .blue {
+        background: #009;
+        color: #fff;
+      }
+      .blue a {
+        color: #fff;
+      }
+      .highlight {
+        background: #ddd;
+        color: #000;
+        font-family: Consolas, "Courier New", Courier, monospace;
+        font-size: 9  0%;
+      }
+    </style>
+    <script type="text/javascript" src="wootquery.js"></script>
+    <script type="text/javascript">
+      // jQuery Input:
+      function showSecond(){
+        $("#second-div").toggleClass("hidden");
+      }
+      function makeBlue(){
+        $("#first-div").toggleClass("blue");
+      }
+      function highlight(){
+        $("code").toggleClass("highlight");
+      }
+      function grow(target){
+        $(target).append("==");
+      }
+      itemCount = 1;
+      function addItem(target){
+        $(target).append("<li>This is element #"+itemCount+"</li>");
+        itemCount++;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to the Show</h1>
+    <div id="first-div">
+      <h2>#first-div</h2>
+      <p>This example focuses on <abbr title="Cascading Style Sheets">CSS</abbr> and content manipulation.</p>
+      <p>This text is in a paragraph in <code>#first-div</code>.</p>
+      <p><a href="#show-second" onClick="javascript:showSecond();">Click here</a> to toggle <code>#second-div</code></p>
+    </div>
+    <div id="second-div" class="hidden">
+      <h2>#second-div</h2>
+      <ul>
+        <li>This list is in <span class="code">#second-div</span>.</li>
+        <li class="second">This list element has class <span class="code">.second</span>.</li>
+        <li>Make <code>#first-div</code> <a href="#make-blue" onClick="javascript:makeBlue();">blue!</a></li>
+        <li>Highlight, <a href="#highlight" onClick="javascript:highlight();">ACTIVATE</a></li>
+        <li>Make me <a href="#grow" onClick="javascript:grow(this);">GROW: </a></li>
+        <li><a href="#add-li" onClick="javascript:addItem('#add-to-me');">Add</a> a subpoint:
+          <ul id="add-to-me">
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
