@@ -58,11 +58,15 @@
                     }
                 }
                 
+                // Select only the first element found
                 if(expr[3] == ':first') {
                     elementList = [elementList[0]];
+                
+                // Select only the last element found
                 } else if(expr[3] == ':last') {
                     elementList = [elementList[-1]];
                 }
+                
                 
                 // Child selector
                 if(type == '>') {
