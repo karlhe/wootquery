@@ -1,6 +1,10 @@
 #summary Which features have been implemented.
 #labels Phase-Implementation
 
+|| Command || Implemented? ||
+|| get() || Yes ||
+|| get(index) || Yes ||
+
 == Selectors ==
 
 === Basic ===
@@ -8,29 +12,69 @@
 || #id || Yes ||
 || element || Yes ||
 || .class || Yes ||
-|| .class.class || ||
-|| `*` || ||
-|| selector1,selector2,selectorN || ||
 
 === Hierarchy ===
 || Command || Implemented? ||
 || ancestor descendant || Yes ||
 || parent > child || Yes ||
-|| prev + next || ||
-|| prev ~ siblings || ||
+
+=== Filters ===
+|| Command || Implemented? ||
+|| :first || Yes ||
+|| :last || Yes ||
+
+
+== Attributes ==
+
+=== Attr ===
+|| Command || Implemented? ||
+|| attr(name) || Yes ||
+|| setAttr(key,value)* || Yes ||
+|| removeAttr(name) || Yes ||
+* This departs from the way jQuery does attr()
+
+=== Class ===
+|| Command || Implemented? ||
+|| addClass(class) || Yes ||
+|| hasClass(class) || Yes ||
+|| removeClass(class) || Yes ||
+|| toggleClass(class) || Yes ||
+
+== Traversing ==
+
+(FINISH THIS)
+
 
 == Manipulation ==
 
 === Changing Contents ===
 || Command || Implemented? ||
 || html() || Yes ||
-|| html(val) || ? ||
-|| text() || ||
-|| text(val) || ||
+|| html(val) || Yes ||
 
 === Inserting Inside ===
 || Command || Implemented? ||
 || append(content) || Yes ||
-|| appendTo(selector) || ||
 || prepend(content) || Yes ||
-|| prependTo(selector) || ||
+
+=== Replacing ===
+|| Command || Implemented? ||
+|| replaceWith(content) || Yes ||
+
+=== Removing ===
+|| Command || Implemented? ||
+|| empty || Yes ||
+|| remove(expr) || Yes ||
+
+=== Clone ===
+|| Command || Implemented? ||
+|| clone() || Yes ||
+
+
+== CSS ==
+
+=== CSS ===
+|| Command || Implemented? ||
+|| css(name) || Yes ||
+|| css(properties) || Yes ||
+|| css(name,value) || Yes ||
