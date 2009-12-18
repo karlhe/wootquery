@@ -5,7 +5,7 @@ $(document).ready(function() {
     $('p').append("ain't it?");
     $('p').css('background','#fcc');    // Set BG color of <p> to #fcc
     bg = $('p').css('background');      // Store current background color of <p> into variable bg
-    $('div').append(" Background of next line: " + bg);                  
+    $('div:first').append(" Background of next line: " + bg);                  
     // This looks almost the same as normal CSS, but not quite. Note conventions.
     styles = {
         background: '#ccc',
