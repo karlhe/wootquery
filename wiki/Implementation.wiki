@@ -78,7 +78,7 @@ tag
 .class:first
 #id > .class
 }}}
-The selector parsing is done in two steps, one which splits up the string in order to support multi-level selection, and the second to identify the string as identifying an id, class, etc. and whether it has selection modifiers such as :first.
+The selector parsing is done in two steps, one which splits up the string via a regular expression in order to support multi-level selection, and the second to identify the string as identifying an id, class, etc. and whether it has selection modifiers such as :first.
 
 At each step of the parsing, as it identifies elements, the function searches the DOM for the corresponding elements and stores them to be used by the next step. It also removes any redundant elements (this can be seen to happen with ancestor selectors and nested elements). When the process is complete, the results are stored in wootQuery.elements and returned.
 
