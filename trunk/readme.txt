@@ -11,5 +11,6 @@ Note: Because of the environment in which we developed (Firefox and Chrome), we 
 
 In the root folder, there are many pages of example code labeled in the format exN.html, where N is a number.
 There also exists an index.html file, which utilizes input.js. These files display much of the implemented functionality of wootQuery.
+To run the code, simply open up the .html files with a browser (Firefox or Chrome). 
 
 Contained in the jQuery folder are the jQuery source code as well as corresponding example pages for jQuery.
