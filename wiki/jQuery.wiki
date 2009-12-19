@@ -48,8 +48,6 @@ The target for this is some kind of selector, which will target any span tag tha
 
 ==2. Implementation:==
 
-In mixed Javascript and pseudocode:
-
 {{{
 (function(){
 
@@ -94,18 +92,9 @@ execute the following block:
 
 Other functions are defined in the same way as init. jQuery doesn't quite use the Javascript prototype model, and instead creates some type of recursive definition based on the init method of the prototype.
 
-
-
-All jQuery statements are in something of this form:
-
-{{{
-$(target).method(args);
-}}}
-
-I've briefly looked over the source code without really understanding anything in it, but I can deduce that $ is, strangely, the name of a Javascript function. It is given an argument target, and from there returns some JObject that responds to method. All of jQuery's methods should be defined somewhere inside JObject.
-
-
 {{{
 $(this).method(args);
 }}}
 When something like this is called, the `jQuery` function above is called, and a `new jQuery.fn.init( selector, context )` is returned. In other words, call-chaining is accomplished by passing around the return value of prototype.init.
+
+Because lots of what jQuery does is the same as what wootQuery does, I won't elaborate too much here, for more details read [Implementation].
