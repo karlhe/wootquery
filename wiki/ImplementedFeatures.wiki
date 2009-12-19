@@ -14,19 +14,19 @@
 
 === Basic ===
 || Command || Implemented? || Description ||
-|| #id || Yes ||
-|| element || Yes ||
-|| .class || Yes ||
+|| #id || Yes || Selects the element corresponding to the id ||
+|| element || Yes || Selects all elements with the given tag ||
+|| .class || Yes || Selects all elements with the given class ||
 
 === Hierarchy ===
 || Command || Implemented? || Description ||
-|| ancestor descendant || Yes ||
-|| parent > child || Yes ||
+|| ancestor descendant || Yes || Selects all descendants of the element ||
+|| parent > child || Yes || Selects all immediate children of the element ||
 
 === Filters ===
 || Command || Implemented? || Description ||
-|| :first || Yes ||
-|| :last || Yes ||
+|| :first || Yes || Selects the first element ||
+|| :last || Yes || Selects the last element ||
 
 
 ----
@@ -117,9 +117,9 @@
 
 === CSS ===
 || Command || Implemented? || Description ||
-|| css(name) || Yes || 
-|| css(properties) || Yes || 
-|| css(name,value) || Yes || 
+|| css(name) || Yes || Returns the value of the css property specified ||
+|| css(properties) || Yes || Sets CSS properties based on a key/value object ||
+|| css(name,value) || Yes || Sets a specfic CSS property to a given value ||
 
 
 ----
@@ -127,11 +127,11 @@
 
 === Page Load ===
 || Command || Implemented? || Description ||
-|| ready(fn) || Yes || ||
+|| ready(fn) || Yes || Delays execution of argument code until DOM is ready ||
 
 === Interaction Helpers ===
 || Command || Implemented? || Description ||
-|| hover(over,out) || Almost`*` ||
+|| hover(over,out) || Almost`*` || A shorthand for mouseover and mouseout ||
 
 === Event Helpers ===
 || Command || Implemented? || Description ||
