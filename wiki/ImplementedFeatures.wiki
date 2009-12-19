@@ -67,6 +67,7 @@
 || parent() || Yes || Get the set of the direct parent elements of each of the matched elements ||
 || next() || Yes || Get the set of unique next siblings of each of the matched elements ||
 || prev() || Yes || Get the set of unique previous siblings of each of the matched elements ||
+|| siblings() || Yes || Get the set of unique siblings of each of the matched elements ||
 
 ----
 == Manipulation ==
