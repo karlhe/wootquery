@@ -710,7 +710,7 @@
                     
                 // Triggers the dblclick function of an element
                 } else {
-                    // TODO: No idea how to do this
+                    // TODO: No idea how to do this. Not an essential feature
                 }
             });
             return this;
