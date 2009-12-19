@@ -104,10 +104,8 @@ $(target).method(args);
 
 I've briefly looked over the source code without really understanding anything in it, but I can deduce that $ is, strangely, the name of a Javascript function. It is given an argument target, and from there returns some JObject that responds to method. All of jQuery's methods should be defined somewhere inside JObject.
 
-Something I'm not too clear on is when something like this happens (as in the hover example above):
 
 {{{
 $(this).method(args);
 }}}
-
-I'm not too clear what this would reference in a normal Javascript scenario. It is possible that jQuery has some sort of check built in that redirects this to what it should be, or equally likely that it works fine without tampering. It turns out that this is handled normally by Javascript.
+When something like this is called, the `jQuery` function above is called, and a `new jQuery.fn.init( selector, context )` is returned. In other words, call-chaining is accomplished by passing around the return value of prototype.init.
