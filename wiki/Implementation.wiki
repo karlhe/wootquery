@@ -58,14 +58,15 @@ The internal representation is largely defined in wootQuery.prototype. Objects i
     wootQuery.fn.init.prototype = wootQuery.fn;
 }}}
 
-We've included some addition code in the above example to discuss a further point. This is a little trick that we carried over after having studied the jQuery implementation a bit. When call-chaining in wootQuery, what is being passed around isn't actually a wootQuery object, it is the init method of the wootQuery prototype. The init method is fairly standard for Javascript prototypes, however the wootQuery version returns `this`, which allows it to be passed around in place of the object itself. This way works flawlessly and we can't say the same about the original approach we attempted.
+We've included some additional code in the above example to discuss a further point. This is a little trick that we carried over after having studied the jQuery implementation a bit. When call-chaining in wootQuery, what is being passed around isn't actually a wootQuery object, it is the init method of the wootQuery prototype. The init method is fairly standard for Javascript prototypes, however the wootQuery version returns `this`, which allows it to be passed around in place of the object itself. This way works flawlessly and we can't say the same about the original approach we attempted.
 
 As displayed in `addClass()` above, except for special cases, each method returns the object after the operation is completed, to allow addition call-chaining.
 
-The DOM elements themselves are simply passed around in the `elements` variable, in a form such as this:
+The matched DOM elements themselves are simply passed around in the `elements` variable, in a form such as this:
 {{{
 [ [HTMLUListElement], [HTMLListElement], ... ]
 }}}
+With this implementation we can use Javascript's `map` function to perform the necessary tasks on the DOM elements. 
 
 == Interpreter/Compiler: ==
 wootQuery code is a chained function-call in Javascript. In the initial creation of the wootQuery object to be passed around, the wootQuery.prototype.init function is called. Init takes the argument to `$()` and searches the DOM for corresponding elements. The elements referenced in the object comprises the entire "state" of the object. Once the initial state is established, all further methods simply modify the state or return information based on the state.
