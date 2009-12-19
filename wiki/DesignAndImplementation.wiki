@@ -8,5 +8,8 @@ These describe the design and implementation of the project:
   * Part 3: [Features]
   * Part 4: [Implementation]
 
+These are the currently implemented features:
+  * [ImplementedFeatures]
+
 These are descriptions of the code examples for wootQuery:
   * [WootQueryExamples]
