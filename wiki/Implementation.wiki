@@ -66,7 +66,7 @@ The matched DOM elements themselves are simply passed around in the `elements` v
 {{{
 [ [HTMLUListElement], [HTMLListElement], ... ]
 }}}
-With this implementation we can use Javascript's `map` function to perform the necessary tasks on the DOM elements. 
+With this implementation we can use Javascript's `map` function to perform the necessary tasks on the DOM elements, as shown above in the example code.
 
 == Interpreter/Compiler: ==
 wootQuery code is a chained function-call in Javascript. In the initial creation of the wootQuery object to be passed around, the wootQuery.prototype.init function is called. Init takes the argument to `$()` and searches the DOM for corresponding elements. The elements referenced in the object comprises the entire "state" of the object. Once the initial state is established, all further methods simply modify the state or return information based on the state.
