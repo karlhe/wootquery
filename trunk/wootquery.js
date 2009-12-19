@@ -1,5 +1,4 @@
 ﻿(function(){
-    // I am honestly not sure what defining these variables accomplishes
     var _$ = window.$;
     var _wootQuery = window.wootQuery;
     
