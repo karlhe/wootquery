@@ -81,7 +81,9 @@
 || append(html) || Yes || Appends the given HTML to innerHTML of matched elements ||
 || append(ele) || Yes || Appends the given DOM element to innerHTML of matched elements ||
 || append(wootQueryObj)|| Yes || Appends content of the given wootQuery object to innerHTML of matched elements ||
-|| prepend(content) || Yes || Prepends content to innerHTML of matched elements. Content can be wootQuery object, DOM element, or HTML string ||
+|| prepend(html) || Yes || Prepends the given HTML to innerHTML of matched elements ||
+|| Prepend(ele) || Yes || Prepends the given DOM element to innerHTML of matched elements ||
+|| Prepend(wootQueryObj)|| Yes || Prepends content of the given wootQuery object to innerHTML of matched elements ||
 
 === Inserting Outside ===
 || Command || Implemented? || Description ||
