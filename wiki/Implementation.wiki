@@ -3,26 +3,63 @@
 ----
 =Part 4: Decide on the implementation.=
 
-Javascript is the only really universally-supported language for client-side scripting. It is unreasonable to try to make our language work as a stand-alone scripting language. In that case, there are only really two potential options:
+Javascript is the only really universally-supported language for client-side scripting. It is unreasonable to try to make our language work as a stand-alone scripting language. In that case, there are only two potential options:
 
    1. Make our language work as a library on top on Javascript.
    2. Make our language "compile" into Javascript, as in everything will be converted into pure Javascript as opposed to needing a library to support the syntax.
 
+We have decided to write our language wootQuery as a Javascript library. Because most of the syntax and underlying representation will be the same, I will describe this in terms of wootQuery and note where it departs from jQuery.
+
 ==Frontend:==
-In case 1, Javascript should handle most of the problems with internal representation, since our language would be valid Javascript. In case 2, anything could work. Most likely we would convert to an AST that can be broken down into optimized Javascript. We would have to take care to recognize actual Javascript in the midst of the code and not convert it, as people may want to use Javascript in places our language is insufficient.
+wootQuery's internal representation is a wootQuery object. Take as an example this code fragment:
+{{{
+$('h1').addClass('bold');
+}}}
+This will pass the string `h1` into the `$()` function. The `window.$()` function actually just references the wootQuery function in our library. The function processes this input and retrieves all matching elements--in this case, all `<h1>` tags--and stores them in the `wootQuery.elements` variable. This wootQuery object is then returned, which allows `addClass()` to be passed to it. `addClass()` is simply a function stored in the wootQuery prototype. Using this call-chaining method, everything that can be call-chained returns a wootQuery object with the new state.
 
 ==The Core Language:==
-In case 1, the core language will simply be Javascript. All features will be some kind of sugar on top of Javascript. For example, `$("a").addClass("b");` would break down to something like this in pseudocode:
+The core language will be Javascript. All features will be some kind of sugar on top of Javascript. For example, `$('a').addClass('b');` would break down to something like this:
 
 {{{
-find element tags "a" in document
-for each element "a" add attribute "class" with value "b"
+for(element in document.getElementsByTagName('a')) {
+  element.setAttribute('class','b');
+}
 }}}
 
-The desugaring will basically be underlying Javascript functions that will take in the statements and run the actual Javascript needed. `$` is a function that returns objects, and the .methods would invoke the methods within those objects. In case 2, the entire langague will have to be completely parsed and interpreted, then formulated into valid Javascript. In a convoluted way this may still be considered "sugar".
+In actuality, that Javascript code does not comprise the entirety of what wootQuery does. For one, `getElementsByTagName()` does not return an Array but a NodeList, which is more limited in terms of available methods. In addition, what we want to do is not to replace the class, but to add one (but only if it isn't already applied). wootQuery takes care of both of these things.
+
+Desugaring these features is actually relatively simple. All arguments to `$()` are expected to be selectors, so the proper element-fetching processes are executed. For everything else, there is simply a function in `wootQuery.prototype` that will run the appropriate Javascript.
+
+It is worth noting that Javascript does not run consistently on all browsers. Because of the environment in which we developed (Firefox and Chrome), we did not fully account for the ability to perform in other browsers (such as Internet Explorer) when developing wootQuery. jQuery, on the other hand, has elegant code that takes care of cross-browser compatibility issues.
 
 ==Internal Representation:==
-In case 1, there aren't terribly many ways to do it. The jQuery way of doing is is creating some kind of jQuery object that responds to the appropriate methods, every time a method is called on a jQuery object. In case 2, most likely the code will be converted to an AST or maybe bytecode if we deem that advantageous.
+The internal representation is largely defined in wootQuery.prototype. Objects in Javascript are essentially hash-maps, there are keys corresponding to each wootQuery function that return a Javascript function that performs the desired operation. For example, this is the addClass method:
+{{{
+    var wootQuery = window.$ = window.wootQuery = function(selector,context) {
+        // Return a new wootQuery object
+        return new wootQuery.fn.init(selector);
+    }
+    ...
+    wootQuery.fn = wootQuery.prototype = {
+        ...
+        addClass: function(classNames) {
+            this.elements.map(function(element) {
+                var getClass = element.getAttribute("class");
+                if (getClass == "" || getClass == null) {
+                    element.setAttribute("class", classNames);
+                } else {
+                    element.setAttribute("class", getClass + ' ' + classNames);
+                }
+            });
+            return this;
+        },
+        ...
+    }
+    wootQuery.fn.init.prototype = wootQuery.fn;
+}}}
+
+We've included some addition code in the above example to discuss a further point. This is a little trick that we carried over after having studied the jQuery implementation a bit. When call-chaining in wootQuery, what is being passed around isn't actually a wootQuery object, it is the init method of the wootQuery prototype. The init method is fairly standard for Javascript prototypes, however the wootQuery version returns `this`.
+
 
 ==Interpreter/Compiler:==
 In case 1, the code will simply be interpreted as a Javascript function call, albeit a really long one at times. In case 2, the code will be compiled into Javascript, probably after an intermediary AST step. However, it would be better not to try to do something like bytecode since that would complicate the process greatly.
