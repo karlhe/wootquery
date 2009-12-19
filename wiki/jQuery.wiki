@@ -90,7 +90,7 @@ execute the following block:
    set the prototype of jQuery.prototype.init to jQuery.prototype
 }}}
 
-Other functions are defined in the same way as init. jQuery doesn't quite use only the Javascript prototype model, and instead creates some type of recursive definition based on the init method of the prototype. We decided to stick solely to the prototype model because it is much simpler to understand, though it may be less elegant. We can think of adding functions as adding methods to the object class, so this simple concept makes the job easier for programmers, especially for those who want to extend the code to add more functionality. 
+Other functions are defined in the same way as init. jQuery doesn't quite use only the Javascript prototype model, and instead creates some type of recursive definition based on the init method of the prototype. We decided to stick solely to the prototype model because it is much simpler to understand, though it may be less elegant. We can think of adding functions as adding methods to the object class, so this simple concept makes the job easier for programmers, especially for those who want to extend the code to add more functionality. We are not entirely sure about the trade-offs between our implementation and jQuery's implementation because we did not spend much time trying to understand jQuery's code, and instead implemented it in this straightforward manner. Due to time constraints, we aimed for adding functionality; the next step, if we had more time, would be to optimize the code.  
 
 {{{
 $(this).method(args);
