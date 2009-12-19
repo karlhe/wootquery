@@ -56,26 +56,26 @@
 == Manipulation ==
 
 === Changing Contents ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || html() || Yes ||
 || html(val) || Yes ||
 
 === Inserting Inside ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || append(content) || Yes ||
 || prepend(content) || Yes ||
 
 === Replacing ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || replaceWith(content) || Yes ||
 
 === Removing ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || empty || Yes ||
 || remove(expr) || Yes ||
 
 === Clone ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || clone() || Yes ||
 
 
@@ -83,7 +83,7 @@
 == CSS ==
 
 === CSS ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || css(name) || Yes ||
 || css(properties) || Yes ||
 || css(name,value) || Yes ||
@@ -93,15 +93,15 @@
 == Events ==
 
 === Page Load ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || ready(fn) || Yes ||
 
 === Interaction Helpers ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || hover(over,out) || Almost`*` ||
 
 === Event Helpers ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || click() || Yes ||
 || click(fn) || Yes ||
 || dblclick() || No`*` ||
