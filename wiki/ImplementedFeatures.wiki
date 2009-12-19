@@ -51,7 +51,7 @@
 == Traversing ==
 
 || Command || Implemented? || Description ||
-|| find(expr) || Yes || Searches for descedents of the matched elements that match the specified expr
+|| find(expr) || Yes || Searches for descedents of the matched elements that match the specified expr ||
 
 
 
@@ -60,13 +60,13 @@
 
 === Changing Contents ===
 || Command || Implemented? || Description ||
-|| html() || Yes || Returns the innerHTML of the first matched element
-|| html(val) || Yes || Set the innerHTML contents of every matched element
+|| html() || Yes || Returns the innerHTML of the first matched element ||
+|| html(val) || Yes || Set the innerHTML contents of every matched element ||
 
 === Inserting Inside ===
 || Command || Implemented? || Description ||
-|| append(content) || Yes ||
-|| prepend(content) || Yes ||
+|| append(content) || Yes || Appends content to innerHTML of matched elements. Content can be wootQuery object, DOM element, or HTML string ||
+|| prepend(content) || Yes || Prepends content to innerHTML of matched elements. Content can be wootQuery object, DOM element, or HTML string ||
 
 === Replacing ===
 || Command || Implemented? || Description ||
