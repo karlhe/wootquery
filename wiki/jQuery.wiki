@@ -97,7 +97,7 @@ $(this).method(args);
 }}}
 When something like this is called, the `jQuery` function above is called, and a `new jQuery.fn.init( selector, context )` is returned. In other words, call-chaining is accomplished by passing around the return value of prototype.init.
 
-Our wootQuery object stores the matched DOM elements into an array, and then in our methods we do something like `this.elements.map(function(element) {do stuff to element})` to perform actions on the matched elements.
+Our wootQuery object stores the matched DOM elements into an array, and then in our methods we do something like `this.elements.map(function(element) {do stuff to element})`, where `this` is the wootQuery object, to perform actions on the matched elements.
 
 For more details about the implementation, see [Implementation].
 
