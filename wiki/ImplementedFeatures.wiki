@@ -4,7 +4,7 @@
 ====Note: The set of matched elements are all the elements found by the given selector====
 
 || Command || Implemented? || Description ||
-|| get() || Yes || Returns all elements in array format ||
+|| get() || Yes || Returns all matched elements in array format ||
 || get(index) || Yes || Returns the element at "index" of the set of matched elements ||
 || size() || Yes || Returns the number of matched elements ||
 
@@ -13,18 +13,18 @@
 == Selectors ==
 
 === Basic ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || #id || Yes ||
 || element || Yes ||
 || .class || Yes ||
 
 === Hierarchy ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || ancestor descendant || Yes ||
 || parent > child || Yes ||
 
 === Filters ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || :first || Yes ||
 || :last || Yes ||
 
@@ -33,13 +33,13 @@
 == Attributes ==
 
 === Attr ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || attr(name) || Yes ||
 || attr(key,value) || Yes ||
 || removeAttr(name) || Yes ||
 
 === Class ===
-|| Command || Implemented? ||
+|| Command || Implemented? || Description ||
 || addClass(class) || Yes ||
 || hasClass(class) || Yes ||
 || removeClass(class) || Yes ||
@@ -49,7 +49,7 @@
 ----
 == Traversing ==
 
-(FINISH THIS)
+|| Command || Implemented? || Description ||
 
 
 ----
