@@ -51,22 +51,50 @@ The target for this is some kind of selector, which will target any span tag tha
 In mixed Javascript and pseudocode:
 
 {{{
-function $(target){
-    obj = (find target in DOM);
-    return JObject(obj);
-}
+(function(){
 
-function JObject(obj){
-    this.target = obj
-    this.ready = function(block){
-    (invoke block when obj is loaded)
-    }
-    this.hover = function(hover,unhover){
-        (invoke hover when obj is hovered, and unhover when it is no longer hovered)
-    }
-    ...
-}
+var 
+	// Will speed up references to window, and allows munging its name.
+	window = this,
+	// Will speed up references to undefined, and allows munging its name.
+	undefined,
+	// Map over jQuery in case of overwrite
+	_jQuery = window.jQuery,
+	// Map over the $ in case of overwrite
+	_$ = window.$,
+
+	jQuery = window.jQuery = window.$ = function( selector, context ) {
+		// The jQuery object is actually just the init constructor 'enhanced'
+		return new jQuery.fn.init( selector, context );
+	},
+
+	...
+;
+
+jQuery.fn = jQuery.prototype = {
+	init: function( selector, context ) {
+            ...
+        },
+        ...
+};
+
+// Give the init function the jQuery prototype for later instantiation
+jQuery.fn.init.prototype = jQuery.fn;
 }}}
+
+Although jQuery is more complex, the above code describes the main idea behind how jQuery is implemented that we carried over to wootQuery. In pseudocode:
+
+{{{
+execute the following block:
+   define the variables window.$ and window.jQuery to reference the jQuery function
+   take in the arguments selector and context, and pass them to jQuery.prototype.init
+   define jQuery.prototype
+   set the prototype of jQuery.prototype.init to jQuery.prototype
+}}}
+
+Other functions are defined in the same way as init. jQuery doesn't quite use the Javascript prototype model, and instead creates some type of recursive definition based on the init method of the prototype.
+
+
 
 All jQuery statements are in something of this form:
 
