@@ -5,7 +5,7 @@ To use wootQuery, simply include it in an HTML page:
 
 Replace the argument for src with the path to the wootquery.js file.
 
-Note: Because of the environment in which we developed (Firefox and Chrome), we did not fully account for the ability to perform in other browsers (such as Internet Explorer) when developing wootQuery. We suggest using Firefox or Chrome to run the code.
+Note: Because of the environment in which we developed (Firefox and Chrome), we did not fully account for the ability to perform in other browsers (such as Internet Explorer) when developing wootQuery. We suggest using Firefox or Chrome to run the code(some examples don't seem to work in IE).
 
 == CONTENTS ==
 
