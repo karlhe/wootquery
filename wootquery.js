@@ -170,6 +170,7 @@
             return this.elements.length;
         },
         
+        //searches for descedents of the matched elements that match the specified expr
         find: function(expr) {
             newElements = [];
             this.elements.map(function(element) {
@@ -186,10 +187,7 @@
             });
             return this;
         },
-        
-        //for checking if an object is a wootQuery object
-        isWootQuery: true,
-        
+                
         // Executes fn when page is done loading
         // TODO: Research DOM-readiness checking, jQuery uses a better method than window.onload
         ready: function(fn) {
