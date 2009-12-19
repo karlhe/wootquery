@@ -75,14 +75,15 @@
 
 === Inserting Around ===
 || Command || Implemented? || Description ||
-|| wrap(html) || Yes || Wrap each matched element with the specified html string ||
+|| wrap(html) || Yes || Wrap each matched element with the specified HTML string ||
 || wrap(ele) || Yes || Wrap each matched element with the specified DOM element ||
-|| wrapInner(html) || Yes || Wrap the inner contents of each matched element with an html string ||
+|| wrapInner(html) || Yes || Wrap the inner contents of each matched element with an HTML string ||
 || wrapInner(ele) || Yes || Wrap the inner contents of each matched element with a DOM element ||
 
 === Replacing ===
 || Command || Implemented? || Description ||
-|| replaceWith(content) || Yes ||
+|| replaceWith(html) || Yes || Replaces all matched elements with specified HTML||
+|| replaceWith(ele) || Yes || Replaces all matched elements with specified DOM elements ||
 
 === Removing ===
 || Command || Implemented? || Description ||
