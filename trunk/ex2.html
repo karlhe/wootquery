@@ -90,8 +90,9 @@
       // Add a list element to specified target
       itemCount = 1;
       function addItem(target){
-        $(target).append("<li>This is element #"+itemCount+"</li>");
-        $(target).find('li').css('fontWeight','normal');
+        $(target).append("<li>This is element #"+itemCount+"</li>")
+                 .find('li')
+                 .css('fontWeight','normal');
         $(target).find('li:last').css('fontWeight','bold');
         itemCount++;
       }
