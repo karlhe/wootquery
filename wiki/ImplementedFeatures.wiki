@@ -87,12 +87,12 @@
 
 === Removing ===
 || Command || Implemented? || Description ||
-|| empty || Yes ||
-|| remove(expr) || Yes ||
+|| empty || Yes || Remove child nodes of each of the matched elements ||
+|| remove() || Yes || Removes all matched elements from the DOM ||
 
 === Clone ===
 || Command || Implemented? || Description ||
-|| clone() || Yes ||
+|| clone() || Yes || Clone the matched elements and select them ||
 
 
 ----
