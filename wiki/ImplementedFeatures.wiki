@@ -1,7 +1,7 @@
 #summary Which features have been implemented.
 #labels Phase-Implementation
 
-Note: The set of matched elements are all the elements found by the given selector
+====Note: The set of matched elements are all the elements found by the given selector====
 
 || Command || Implemented? || Description ||
 || get() || Yes || Returns all elements in array format ||
