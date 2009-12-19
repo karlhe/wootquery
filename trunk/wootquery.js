@@ -587,7 +587,7 @@
             return this;
         },
         
-        //get the set of elements containing all of the children of the set of matched elements
+        //get the set of elements containing all of the immediate children of the set of matched elements
         children: function() {
             childElements = [];
             this.elements.map(function(element) {
@@ -604,14 +604,17 @@
             parentElements = [];
             this.elements.map(function(element) {
                 if (element.parentNode) {
-                    parentElements.push(element.parentNode);
+                    //only add in the parent if it is not already part of the set of matched parent elements
+                    if (parentElements.indexOf(element.parentNode) == -1) {
+                        parentElements.push(element.parentNode);
+                    }
                 }
             });
             this.elements = parentElements;
             return this;
         },
         
-        //get the set of next siblings of each of the matched elements
+        //get the set of unique next siblings of each of the matched elements
         next: function() {
             siblingElements = [];
             this.elements.map(function(element) {
@@ -629,7 +632,7 @@
             return this;
         },
         
-        //get the set of previous siblings of each of the matched elements
+        //get the set of unique previous siblings of each of the matched elements
         prev: function() {
             siblingElements = [];
             this.elements.map(function(element) {
@@ -647,8 +650,19 @@
             return this;            
         },
         
+        //get the set of unique siblings of each of the matched elements
         siblings: function() {
-        
+            siblingElements = [];
+            this.elements.map(function(element) {
+                var sibs = element.parentNode.children;
+                for (i in sibs) {
+                    if (siblingElements.indexOf(sibs[i]) == -1) {
+                        siblingElements.push(sibs[i]);
+                    }
+                }
+            });
+            this.elements = siblingElements;
+            return this;
         },
         
         /************************************
