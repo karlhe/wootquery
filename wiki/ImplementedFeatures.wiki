@@ -113,9 +113,9 @@
 
 === CSS ===
 || Command || Implemented? || Description ||
-|| css(name) || Yes || ||
-|| css(properties) || Yes || ||
-|| css(name,value) || Yes || ||
+|| css(name) || Yes || 
+|| css(properties) || Yes || 
+|| css(name,value) || Yes || 
 
 
 ----
