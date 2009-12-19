@@ -97,4 +97,4 @@ $(this).method(args);
 }}}
 When something like this is called, the `jQuery` function above is called, and a `new jQuery.fn.init( selector, context )` is returned. In other words, call-chaining is accomplished by passing around the return value of prototype.init.
 
-Because lots of what jQuery does is the same as what wootQuery does, we won't elaborate too much here, for more details read [Implementation].
+Because lots of what jQuery does is the same as what wootQuery does, we won't elaborate too much here, for more details see [Implementation].
