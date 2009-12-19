@@ -50,8 +50,20 @@
 ----
 == Traversing ==
 
+=== Filtering ===
+|| Command || Implemented? || Description ||
+|| eq(n) || Yes || Reduce the set of matched elements to be the nth matched element ||
+|| slice(start, end) || Yes || Selects a subset of the matched elements, specified by the start and end indices of the set of matched elements ||
+|| not(selector) || Yes || Remove elements matching the selector from the list of matched elements ||
+|| filter(selector) || Yes || Keeps only elements from the set of matched elements that match the given selector ||
+|| filter(fn) || Yes || Only keeps elements for which the given function returns true ||
+|| is(selector) || Yes || Checks if at least one of the matched elements matches the given selector. returns true or false ||
+
+=== Finding ===
 || Command || Implemented? || Description ||
 || find(expr) || Yes || Searches for descedents of the matched elements that match the specified expr ||
+
+
 
 
 
