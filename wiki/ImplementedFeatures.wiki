@@ -68,6 +68,18 @@
 || append(content) || Yes || Appends content to innerHTML of matched elements. Content can be wootQuery object, DOM element, or HTML string ||
 || prepend(content) || Yes || Prepends content to innerHTML of matched elements. Content can be wootQuery object, DOM element, or HTML string ||
 
+=== Inserting Outside ===
+|| Command || Implemented? || Description ||
+|| after(content) || Yes || Insert content after each of the matched elements ||
+|| before(content) || Yes || Insert content after each of the matched elements ||
+
+=== Inserting Around ===
+|| Command || Implemented? || Description ||
+|| wrap(html) || Yes || Wrap each matched element with the specified html string ||
+|| wrap(ele) || Yes || Wrap each matched element with the specified DOM element ||
+|| wrapInner(html) || Yes || Wrap the inner contents of each matched element with an html string ||
+|| wrapInner(ele) || Yes || Wrap the inner contents of each matched element with a DOM element ||
+
 === Replacing ===
 || Command || Implemented? || Description ||
 || replaceWith(content) || Yes ||
