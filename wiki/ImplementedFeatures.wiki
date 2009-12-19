@@ -135,12 +135,12 @@
 
 === Event Helpers ===
 || Command || Implemented? || Description ||
-|| click() || Yes ||
-|| click(fn) || Yes ||
-|| dblclick() || No`*` ||
-|| dblclick(fn) || Yes ||
-|| mouseover(fn) || Almost`*` ||
-|| mouseout(fn) || Almost`*` ||
+|| click() || Yes || Simulates clicking the selected elements ||
+|| click(fn) || Yes || Assigns a click event to selected elements ||
+|| dblclick() || No`*` || Simulates a double-click on the selected elements ||
+|| dblclick(fn) || Yes || Assigns a double-click event to selected elements ||
+|| mouseover(fn) || Almost`*` || Assigns a mousover event to selected elements ||
+|| mouseout(fn) || Almost`*` || Assigns a mouseout event to selected elements ||
 
 
 `*` See notes in JS file
