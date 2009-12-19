@@ -1,7 +1,7 @@
 #summary Some thought behind how to implement the language.
 #labels Phase-Design
 ----
-=Part 4: Decide on the implementation.=
+= Part 4: Implementation Decisions =
 
 Javascript is the only really universally-supported language for client-side scripting. It is unreasonable to try to make our language work as a stand-alone scripting language. In that case, there are only two potential options:
 
@@ -10,14 +10,14 @@ Javascript is the only really universally-supported language for client-side scr
 
 We have decided to write our language wootQuery as a Javascript library. Because most of the syntax and underlying representation will be the same, I will describe this in terms of wootQuery and note where it departs from jQuery.
 
-==Frontend:==
+== Frontend: ==
 wootQuery's internal representation is a wootQuery object. Take as an example this code fragment:
 {{{
 $('h1').addClass('bold');
 }}}
 This will pass the string `h1` into the `$()` function. The `window.$()` function actually just references the wootQuery function in our library. The function processes this input and retrieves all matching elements--in this case, all `<h1>` tags--and stores them in the `wootQuery.elements` variable. This wootQuery object is then returned, which allows `addClass()` to be passed to it. `addClass()` is simply a function stored in the wootQuery prototype. Using this call-chaining method, everything that can be call-chained returns a wootQuery object with the new state.
 
-==The Core Language:==
+== The Core Language: ==
 The core language will be Javascript. All features will be some kind of sugar on top of Javascript. For example, `$('a').addClass('b');` would break down to something like this:
 
 {{{
@@ -32,7 +32,7 @@ Desugaring these features is actually relatively simple. All arguments to `$()` 
 
 It is worth noting that Javascript does not run consistently on all browsers. Because of the environment in which we developed (Firefox and Chrome), we did not fully account for the ability to perform in other browsers (such as Internet Explorer) when developing wootQuery. jQuery, on the other hand, has elegant code that takes care of cross-browser compatibility issues.
 
-==Internal Representation:==
+== Internal Representation: ==
 The internal representation is largely defined in wootQuery.prototype. Objects in Javascript are essentially hash-maps, there are keys corresponding to each wootQuery function that return a Javascript function that performs the desired operation. For example, this is the addClass method:
 {{{
     var wootQuery = window.$ = window.wootQuery = function(selector,context) {
@@ -67,8 +67,8 @@ The DOM elements themselves are simply passed around in the `elements` variable,
 [ [HTMLUListElement], [HTMLListElement], ... ]
 }}}
 
-==Interpreter/Compiler:==
+== Interpreter/Compiler: ==
 wootQuery code is a chained function-call in Javascript. In the initial creation of the wootQuery object to be passed around, the wootQuery.prototype.init function is called. Init takes the argument to `$()` and searches the DOM for corresponding elements. The elements referenced in the object comprises the entire "state" of the object. Once the initial state is established, all further methods simply modify the state or return information based on the state.
 
-==Debugging:==
+== Debugging: ==
 Debugging in Javascript is inherently tricky, however all the major browsers include a Javascript console which shows flaws in Javascript code. The behavior of the wootQuery functions, however, can't be tested in this manner. While there are tools available to perform behavior-driven tests, we do not have the time-luxury to be learning a bunch of tools, so our tests have been done manually by writing test code. The majority of our test code is available in `index.html` of the root folder of the repository.
