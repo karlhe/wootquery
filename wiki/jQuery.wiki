@@ -97,6 +97,8 @@ $(this).method(args);
 }}}
 When something like this is called, the `jQuery` function above is called, and a `new jQuery.fn.init( selector, context )` is returned. In other words, call-chaining is accomplished by passing around the return value of prototype.init.
 
+Our wootQuery object stores the matched DOM elements into an array, and then in our methods we do something like 'this.elements.map(function(element) {do stuff to element})'.
+
 For more details about the implementation, see [Implementation].
 
 We tried thinking of alternative implementations to see if we could optimize the performance. Currently we traverse the whole DOM for elements, store them in a list, and run through the list every time we call a method on them. This could be slow if the page is huge and we have a lot of matched elements. We thought about evaluating and applying methods eagerly, where we would search through DOM, and right when it finds a target element it would apply all the chained methods to it and then find the next element. This would work in some cases and would be more efficient if the set of matched elements is huge and the page is large. However, it can lead to unpredicted behavior if some of the matched elements depend on other matched elements in their chained method calls, causing chained calls to not work as well in some cases. It is also harder to implement and less intuitive, since we aren't applying a method uniformly to all matched elements, and then applying the next method, and so on. We decided to stick with the simple prototype model, in which we can apply object-oriented programming concepts.  
