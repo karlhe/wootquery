@@ -151,6 +151,9 @@
         //for checking if an object is a wootQuery object
         isWootQuery: true,
         
+        //selector used to find the set of matched elements
+        selector: this.selector,
+        
         get: function(index) {
             // Returns element at "index" of "elements"
             if(typeof(index) == 'number') {
@@ -166,8 +169,6 @@
         size: function() {
             return this.elements.length;
         },
-        
-        selector: this.selector,
         
         find: function(expr) {
             newElements = [];
