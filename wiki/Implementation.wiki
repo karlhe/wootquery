@@ -58,11 +58,12 @@ The internal representation is largely defined in wootQuery.prototype. Objects i
     wootQuery.fn.init.prototype = wootQuery.fn;
 }}}
 
-We've included some addition code in the above example to discuss a further point. This is a little trick that we carried over after having studied the jQuery implementation a bit. When call-chaining in wootQuery, what is being passed around isn't actually a wootQuery object, it is the init method of the wootQuery prototype. The init method is fairly standard for Javascript prototypes, however the wootQuery version returns `this`.
+We've included some addition code in the above example to discuss a further point. This is a little trick that we carried over after having studied the jQuery implementation a bit. When call-chaining in wootQuery, what is being passed around isn't actually a wootQuery object, it is the init method of the wootQuery prototype. The init method is fairly standard for Javascript prototypes, however the wootQuery version returns `this`, which allows it to be passed around in place of the object itself. We admittedly are not entirely sure why this is accomplished in this manner, however it works flawlessly and we can't say the same about the original approach we attempted.
 
+As displayed in `addClass()` above, except for special cases, each method returns the object after the operation is completed, to allow addition call-chaining.
 
 ==Interpreter/Compiler:==
-In case 1, the code will simply be interpreted as a Javascript function call, albeit a really long one at times. In case 2, the code will be compiled into Javascript, probably after an intermediary AST step. However, it would be better not to try to do something like bytecode since that would complicate the process greatly.
+wootQuery code is a chained function-call in Javascript. In the initial creation of the wootQuery object to be passed around, the wootQuery.prototype.init function is called. Init takes the argument to `$()` and searches the DOM for corresponding elements. The elements referenced in the object comprises the entire "state" of the object. Once the initial state is established, all further methods simply modify the state or return information based on the state.
 
 ==Debugging:==
-In case 1, debugging will likely consist of using something like Firebug and the Javascript console, in other words just standard Javascript debugging tools. In case 2, similar tools can be used (if the code actually compiles) and then problems can be found that way, or well-thought-out error messages in the interpreter/compiler and test code in the language could point out flaws. 
+Debugging in Javascript is inherently tricky, however all the major browsers include a Javascript console which shows flaws in Javascript code. The behavior of the wootQuery functions, however, can't be tested in this manner. While there are tools available to perform behavior-driven tests, we do not have the time-luxury to be learning a bunch of tools, so our tests have been done manually by writing test code. The majority of our test code is available in `index.html` of the root folder of the repository.
