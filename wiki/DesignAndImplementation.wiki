@@ -2,11 +2,11 @@
 #labels Phase-Requirements,Phase-Design,Featured
 
 
-These are the four items related to design of our project, each page is a part of HW3.
+These describe the design and implementation of the project:
   * Part 1: [Problem]
   * Part 2: [jQuery]
   * Part 3: [Features]
   * Part 4: [Implementation]
 
-These are code examples that we wish to be able to implement:
+These are descriptions of the code examples for wootQuery:
   * [WootQueryExamples]
