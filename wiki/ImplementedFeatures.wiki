@@ -7,7 +7,8 @@
 || get() || Yes || Returns all matched elements in array format ||
 || get(index) || Yes || Returns the element at "index" of the set of matched elements ||
 || size() || Yes || Returns the number of matched elements ||
-
+|| each(callback) || Yes || Apply the iterator function "callback" to each of the matched elements
+|| ready(fn) || Yes || ||
 
 ----
 == Selectors ==
@@ -50,6 +51,8 @@
 == Traversing ==
 
 || Command || Implemented? || Description ||
+|| find(expr) || Yes || Searches for descedents of the matched elements that match the specified expr
+
 
 
 ----
