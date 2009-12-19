@@ -8,7 +8,6 @@
 || get(index) || Yes || Returns the element at "index" of the set of matched elements ||
 || size() || Yes || Returns the number of matched elements ||
 || each(callback) || Yes || Apply the iterator function "callback" to each of the matched elements ||
-|| ready(fn) || Yes || ||
 
 ----
 == Selectors ==
@@ -41,10 +40,11 @@
 
 === Class ===
 || Command || Implemented? || Description ||
-|| addClass(class) || Yes ||
-|| hasClass(class) || Yes ||
-|| removeClass(class) || Yes ||
-|| toggleClass(class) || Yes ||
+|| addClass(classNames) || Yes || classNames is a string specifying the class(es) separated by spaces to be added as an attribute to the matched elements ||
+|| hasClass(className) || Yes || Returns true if the specified class is present in at least one of the matched elements, and false otherwise ||
+|| removeClass(classNames) || Yes || Removes the specified classes from the matched elements ||
+|| removeClass() || Yes || Removes all classes from the set of matched elements ||
+|| toggleClass(class) || Yes || For each matched element, add the specified class if not present; remove class if it is ||
 
 
 ----
