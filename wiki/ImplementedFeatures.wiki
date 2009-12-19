@@ -34,9 +34,9 @@
 
 === Attr ===
 || Command || Implemented? || Description ||
-|| attr(name) || Yes ||
-|| attr(key,value) || Yes ||
-|| removeAttr(name) || Yes ||
+|| attr(name) || Yes || Return the given attribute of the first matched element ||
+|| attr(key,value) || Yes || Set a single property to a value on all the matched elements ||
+|| removeAttr(name) || Yes || Remove an attribute from each of the matched elements ||
 
 === Class ===
 || Command || Implemented? || Description ||
@@ -87,9 +87,9 @@
 
 === CSS ===
 || Command || Implemented? || Description ||
-|| css(name) || Yes ||
-|| css(properties) || Yes ||
-|| css(name,value) || Yes ||
+|| css(name) || Yes || ||
+|| css(properties) || Yes || ||
+|| css(name,value) || Yes || ||
 
 
 ----
@@ -97,7 +97,7 @@
 
 === Page Load ===
 || Command || Implemented? || Description ||
-|| ready(fn) || Yes ||
+|| ready(fn) || Yes || ||
 
 === Interaction Helpers ===
 || Command || Implemented? || Description ||
