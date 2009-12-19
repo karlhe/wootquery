@@ -71,5 +71,16 @@ With this implementation we can use Javascript's `map` function to perform the n
 == Interpreter/Compiler: ==
 wootQuery code is a chained function-call in Javascript. In the initial creation of the wootQuery object to be passed around, the wootQuery.prototype.init function is called. Init takes the argument to `$()` and searches the DOM for corresponding elements. The elements referenced in the object comprises the entire "state" of the object. Once the initial state is established, all further methods simply modify the state or return information based on the state, as shown in the example code above.
 
+The selector parsing can be thought of as the "interpreter" for wootQuery. It can be passed in one of two things: A DOM object, or a string. If a DOM object is passed in, it simply sets the DOM object as wootQuery.elements, and returns the object. Otherwise, it attempts to parse the string with a RegEx.
+{{{
+#id
+tag
+.class:first
+#id > .class
+}}}
+The selector parsing is done in two steps, one which splits up the string in order to support multi-level selection, and the second to identify the string as identifying an id, class, etc. and whether it has selection modifiers such as :first.
+
+At each step of the parsing, as it identifies elements, the function searches the DOM for the corresponding elements and stores them to be used by the next step. It also removes any redundant elements (this can be seen to happen with ancestor selectors and nested elements). When the process is complete, the results are stored in wootQuery.elements and returned.
+
 == Debugging: ==
 Debugging in Javascript is inherently tricky, however all the major browsers include a Javascript console which shows flaws in Javascript code. The behavior of the wootQuery functions, however, can't be tested in this manner. While there are tools available to perform behavior-driven tests, we do not have the time-luxury to be learning these tools, so our tests have been done manually by writing test code and testing each method. Example test code is available in `index.html` of the root folder of the repository(tests are commented out), and also in the demo examples. Each method is fairly independent of one another, so we would write a method, write test cases, test it, and then move on to the next method. 
