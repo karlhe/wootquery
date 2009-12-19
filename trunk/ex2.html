@@ -15,12 +15,15 @@
       .hidden {
         display: none;
       }
-      .blue {
+      html body .blue {
         background: #009;
         color: #fff;
       }
-      .blue a {
+      html body .blue a:link, html body .blue a:visited {
         color: #fff;
+      }
+      html body .blue h2 {
+        border-color: #fff;
       }
       .highlight {
         background: #ddd;
@@ -28,6 +31,8 @@
         font-family: Consolas, "Courier New", Courier, monospace;
         font-size: 90%;
       }
+      
+      /* Styled version */
       .styled {
         background: #363;
         font-family: Calibri,Verdana,Tahoma,sans-serif;
@@ -60,22 +65,29 @@
         margin-top: 0;
         border-bottom: 2px solid #030;
       }
+      .styled abbr {
+        text-decoration: underline;
+      }
     </style>
     <script type="text/javascript" src="wootquery.js"></script>
     <script type="text/javascript">
-      // jQuery Input:
+    
+      // Show #second-div
       function showSecond(){
         $("#second-div").toggleClass("hidden");
       }
-      function makeBlue(){
-        $("#first-div").toggleClass("blue");
-      }
+      
+      // Highlight code fragments
       function highlight(){
         $("code").toggleClass("highlight");
       }
+      
+      // Grow the specified target
       function grow(target){
         $(target).append("==");
       }
+      
+      // Add a list element to specified target
       itemCount = 1;
       function addItem(target){
         $(target).append("<li>This is element #"+itemCount+"</li>");
@@ -83,8 +95,24 @@
         $(target).find('li:last').css('fontWeight','bold');
         itemCount++;
       }
+      
+      // Change the h1 to specified text
       function changeTitle(text){
         $('h1').html(text);
+      }
+      
+      // Clicking #make-blue makes #first-div blue
+      $(document).ready(function() {
+        $('#make-blue').click(function(event) {
+          $("#first-div").toggleClass("blue");
+          event.preventDefault();
+        });
+      });
+      
+      function changeParagraphs() {
+        $('p').each(function(element) {
+          $(element).replaceWith('<ol><li>'+$(element).html()+'</li></ol>');
+        });
       }
     </script>
   </head>
@@ -94,26 +122,30 @@
       <h2>#first-div</h2>
       <p>This example focuses on <abbr title="Cascading Style Sheets">CSS</abbr> and content manipulation.</p>
       <p>This text is in a paragraph in <code>#first-div</code>.</p>
-      <p><a href="#change-title" onClick="changeTitle('Good evening, ladies.')">Wrong audience?</a></p>
+      <p><a href="#change-title" onClick="changeTitle('Hello, ladies.');">Wrong audience?</a></p>
       <p><a href="#show-second" onClick="showSecond();">Click here</a> to toggle <code>#second-div</code></p>
     </div>
     <div id="second-div" class="hidden">
       <h2>#second-div</h2>
+      <p class="second">This paragraph has class <code>.second</code>.</p>
       <ul>
-        <li>This list is in <span class="code">#second-div</span>.</li>
-        <li class="second">This list element has class <span class="code">.second</span>.</li>
-        <li>Make <code>#first-div</code> <a href="#make-blue" onClick="makeBlue();">blue!</a></li>
-        <li>Highlight, <a href="#highlight" onClick="highlight();">ACTIVATE</a></li>
-        <li>Make me <a href="#grow" onClick="grow(this);">GROW: </a></li>
+        <li>This list is in <code>#second-div</code>.</li>
+        <li class="second">This list element has class <code>.second</code>.</li>
+        <li><a href="#change-second" onClick="$('.second').html('<b>Hello to you, too!</b>');">Hi, second class!</a></li>
+        <li>Make <code>#first-div</code> <a href="http://www.google.com" id="make-blue">blue!</a></li>
+        <li>Highlight, <a href="#highlight" onClick="$('code').toggleClass('highlight');">ACTIVATE</a></li>
+        <li>Make me <a href="#grow" onClick="grow($(this).parent().get(0));">GROW</a>: </li>
         <li><a href="#add-li" onClick="addItem('#add-to-me');">Add</a> a subpoint:
           <ul id="add-to-me">
           </ul>
         </li>
+        <li>Inject the <a href="#add-x" onClick="$('ul > li > ul').children().html('I AM X');">X-GENE</a>.</li>
       </ul>
     </div>
     <div id="third-div">
       <h2>#third-div</h2>
       <p><a href="#remove-titles" onClick="$('h2').remove()">Remove Titles</a></p>
+      <p>Make paragraphs into <a href="#p-to-list" onClick="changeParagraphs();">lists</a></p>
       <p><a href="#stylize" onClick="$('body').toggleClass('styled');">Stylize Page!</a></p>
     </div>
   </body>
