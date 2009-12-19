@@ -63,10 +63,10 @@
 || Command || Implemented? || Description ||
 || find(expr) || Yes || Searches for descedents of the matched elements that match the specified expr ||
 || add(selector) || Yes || Add more elements, matched by the given selector, to the set of matched elements ||
-|| children() || Yes || Get the set of elements containing all of the children of the set of matched elements ||
-|| parent() || Yes || Get the set of the parent elements of each of the matched elements ||
-|| next() || Yes || Get the set of next siblings of each of the matched elements ||
-|| prev() || Yes || Get the set of previous siblings of each of the matched elements ||
+|| children() || Yes || Get the set of elements containing all of the unique immediate children of the set of matched elements ||
+|| parent() || Yes || Get the set of the direct parent elements of each of the matched elements ||
+|| next() || Yes || Get the set of unique next siblings of each of the matched elements ||
+|| prev() || Yes || Get the set of unique previous siblings of each of the matched elements ||
 
 ----
 == Manipulation ==
