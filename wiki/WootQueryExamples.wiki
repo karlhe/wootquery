@@ -41,7 +41,7 @@ To exhibit the ability to manipulate the DOM, this example generates an entire p
         border: 1px solid #ccc;
       }
     </style>
-    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="wootquery.js"></script>
     <script type="text/javascript">
       // jQuery Input:
       $(document).ready(function(){
@@ -57,8 +57,10 @@ To exhibit the ability to manipulate the DOM, this example generates an entire p
         $("#second").append("<h2>#second</h2>");
         $("#second").append("<ul></ul>");
         $("#second > ul").append("<li>One potato</li>");
-        $("#second > ul > li").append("<li>Two potato</li>");
-        $("ul").append("<li>I'm in two places!</li>");
+        $("#second > ul").append("<li>Two potato</li>");
+        $("ul").prepend("<li>I'm in two places!</li>");
+        $("#second > ul > li:last").append("<ul><li>Sub potato</li></ul>");
+        $("#second > ul ul").css('listStyleType','square');
         $("#first ul").append("<li>I'm not, however.</li>");
       });
     </script>
@@ -92,63 +94,139 @@ This example focuses on the ability to manipulate CSS classes and element conten
       .hidden {
         display: none;
       }
-      .blue {
+      html body .blue {
         background: #009;
         color: #fff;
       }
-      .blue a {
+      html body .blue a:link, html body .blue a:visited {
         color: #fff;
+      }
+      html body .blue h2 {
+        border-color: #fff;
       }
       .highlight {
         background: #ddd;
         color: #000;
         font-family: Consolas, "Courier New", Courier, monospace;
-        font-size: 9  0%;
+        font-size: 90%;
+      }
+      
+      /* Styled version */
+      .styled {
+        background: #363;
+        font-family: Calibri,Verdana,Tahoma,sans-serif;
+      }
+      .styled h1 {
+        background: transparent;
+        color: #fff;
+        text-align: center;
+      }
+      .styled div {
+        border: 10px solid #000;
+        padding: 20px;
+        background: #fff;
+        width: 700px;
+        margin: 20px auto;
+      }
+      .styled .highlight {
+        background: #9c9;
+      }
+      .styled a:link, .styled a:visited {
+        background: transparent;
+        color: #060;
+        font-weight: bold;
+      }
+      .styled a:hover {
+        background: #060;
+        color: #fff;
+      }
+      .styled h2 {
+        margin-top: 0;
+        border-bottom: 2px solid #030;
+      }
+      .styled abbr {
+        text-decoration: underline;
       }
     </style>
-    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="wootquery.js"></script>
     <script type="text/javascript">
-      // jQuery Input:
+    
+      // Show #second-div
       function showSecond(){
         $("#second-div").toggleClass("hidden");
       }
-      function makeBlue(){
-        $("#first-div").toggleClass("blue");
-      }
+      
+      // Highlight code fragments
       function highlight(){
         $("code").toggleClass("highlight");
       }
+      
+      // Grow the specified target
       function grow(target){
         $(target).append("==");
       }
+      
+      // Add a list element to specified target
       itemCount = 1;
       function addItem(target){
-        $(target).append("<li>This is element #"+itemCount+"</li>");
+        $(target).append("<li>This is element #"+itemCount+"</li>")
+                 .find('li')
+                 .css('fontWeight','normal');
+        $(target).find('li:last').css('fontWeight','bold');
         itemCount++;
+      }
+      
+      // Change the h1 to specified text
+      function changeTitle(text){
+        $('h1').html(text);
+      }
+      
+      // Clicking #make-blue makes #first-div blue
+      $(document).ready(function() {
+        $('#make-blue').click(function(event) {
+          $("#first-div").toggleClass("blue");
+          event.preventDefault();
+        });
+      });
+      
+      function changeParagraphs() {
+        $('p').each(function(element) {
+          $(element).replaceWith('<ol><li>'+$(element).html()+'</li></ol>');
+        });
       }
     </script>
   </head>
   <body>
-    <h1>Welcome to the Show</h1>
+    <h1>Good evening, gentlemen.</h1>
     <div id="first-div">
       <h2>#first-div</h2>
       <p>This example focuses on <abbr title="Cascading Style Sheets">CSS</abbr> and content manipulation.</p>
       <p>This text is in a paragraph in <code>#first-div</code>.</p>
-      <p><a href="#show-second" onClick="javascript:showSecond();">Click here</a> to toggle <code>#second-div</code></p>
+      <p><a href="#change-title" onClick="changeTitle('Hello, ladies.');">Wrong audience?</a></p>
+      <p><a href="#show-second" onClick="showSecond();">Click here</a> to toggle <code>#second-div</code></p>
     </div>
     <div id="second-div" class="hidden">
       <h2>#second-div</h2>
+      <p class="second">This paragraph has class <code>.second</code>.</p>
       <ul>
-        <li>This list is in <span class="code">#second-div</span>.</li>
-        <li class="second">This list element has class <span class="code">.second</span>.</li>
-        <li>Make <code>#first-div</code> <a href="#make-blue" onClick="javascript:makeBlue();">blue!</a></li>
-        <li>Highlight, <a href="#highlight" onClick="javascript:highlight();">ACTIVATE</a></li>
-        <li>Make me <a href="#grow" onClick="javascript:grow(this);">GROW: </a></li>
-        <li><a href="#add-li" onClick="javascript:addItem('#add-to-me');">Add</a> a subpoint:
+        <li>This list is in <code>#second-div</code>.</li>
+        <li class="second">This list element has class <code>.second</code>.</li>
+        <li><a href="#change-second" onClick="$('.second').html('<b>Hello to you, too!</b>');">Hi, second class!</a></li>
+        <li>Make <code>#first-div</code> <a href="http://www.google.com" id="make-blue">blue!</a></li>
+        <li>Highlight, <a href="#highlight" onClick="$('code').toggleClass('highlight');">ACTIVATE</a></li>
+        <li>Make me <a href="#grow" onClick="grow($(this).parent().get(0));">GROW</a>: </li>
+        <li><a href="#add-li" onClick="addItem('#add-to-me');">Add</a> a subpoint:
           <ul id="add-to-me">
           </ul>
         </li>
+        <li>Inject the <a href="#add-x" onClick="$('ul > li > ul').children().html('I AM X');">X-GENE</a>.</li>
       </ul>
+    </div>
+    <div id="third-div">
+      <h2>#third-div</h2>
+      <p><a href="#remove-titles" onClick="$('h2').remove()">Remove Titles</a></p>
+      <p>Make paragraphs into <a href="#p-to-list" onClick="changeParagraphs();">lists</a></p>
+      <p><a href="#stylize" onClick="$('body').toggleClass('styled');">Stylize Page!</a></p>
     </div>
   </body>
 </html>
@@ -181,51 +259,54 @@ This example focuses on event handlers:
         height: 3em;
       }
     </style>
-    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="wootquery.js"></script>
     <script type="text/javascript">
       // jQuery Input:
       $(document).ready(function(){
         $("li").hover(
           function () {
-            $(this).append($("<span class='woot'> Double-click me to make me disappear forever!</span>"));
+            $(this).append("<span class='woot'> Double-click me to make me disappear forever!</span>");
           },
           function () {
             $(this).find("span:last").remove();
           }
         );
         $("li").dblclick(function(){
-          $(this).slideUp();
+           $(this).remove();
         });          
-        $("p#p1").click(function(){
-           $(this).text("Saung: \"I'm cool!\"").next("p").text("Karl: \"And I'm not :(\"");
+        $("#p1").click(function(){
+           $(this).html("Saung: \"I'm cool!\"");
+           $('#p2').html("Karl: \"And I'm not :(\"");
         });
-        $("p#p2").click(function(){
-          $(this).text("Karl: \"I'm cool now!\"").prev("p").text("Saung: \"Now I'm not :(\"");
+        $("#p2").click(function(){
+           $(this).html("Karl: \"I'm cool now!\"");
+           $('#p1').html("Saung: \"Now I'm not :(\"");
         });
-        $("p#p1").hover(
+        $("#p1").hover(
           function(){
-              $(this).append($("<span class='woot'> Click me to make Saung cool and Karl not!</span>"));
+              $(this).append("<span class='woot'> Click me to make Saung cool and Karl not!</span>");
           },
           function(){
               $(this).find("span:last").remove();
           }
         );
-        $("p#p2").hover(
+        $("#p2").hover(
           function(){
-              $(this).append($("<span class='woot'> Click me to make Karl cool and Saung not!</span>"));
+              $(this).append("<span class='woot'> Click me to make Karl cool and Saung not!</span>");
           },
           function(){
               $(this).find("span:last").remove();
           }
         );
+        p3 = $("#p3");
         $("#third-div").hover(
           function(){
-              $("p#p3").fadeOut("slow");
+              $(this).html("");
           },
           function(){
-              $("p#p3").fadeIn("slow");
+              $(this).append(p3);
           }
-        );                  
+        );
       });
         
     </script>
@@ -234,15 +315,14 @@ This example focuses on event handlers:
     <h1>Welcome to the Show</h1>
     <p> Hover over the text below to see what you can do!</p>
     <div id="first-div">
-      <p id = "p1"> Saung: "Welcome!" </p>
+      <p id="p1"> Saung: "Welcome!" </p>
       <p id="p2"> Karl: "Welcome!" </p>
     </div>
     <div id="second-div">
       <ul>
-        <li>This list is in <code>#second-div</code>.</li>
-        <li class="second">This list element has class <code>.second</code>.</li>
-        <li>Welcome to the Show!</li>
-        <li>What's in your wallet?</li>
+        <li>List element 1</li>
+        <li>List element 2</li>
+        <li>List element THREE</li>
       </ul>
     </div>
     <div id="third-div">
