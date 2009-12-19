@@ -7,7 +7,7 @@
 || get() || Yes || Returns all matched elements in array format ||
 || get(index) || Yes || Returns the element at "index" of the set of matched elements ||
 || size() || Yes || Returns the number of matched elements ||
-|| each(callback) || Yes || Apply the iterator function "callback" to each of the matched elements
+|| each(callback) || Yes || Apply the iterator function "callback" to each of the matched elements ||
 || ready(fn) || Yes || ||
 
 ----
@@ -60,8 +60,8 @@
 
 === Changing Contents ===
 || Command || Implemented? || Description ||
-|| html() || Yes ||
-|| html(val) || Yes ||
+|| html() || Yes || Returns the innerHTML of the first matched element
+|| html(val) || Yes || Set the innerHTML contents of every matched element
 
 === Inserting Inside ===
 || Command || Implemented? || Description ||
