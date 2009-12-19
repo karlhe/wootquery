@@ -26,7 +26,7 @@ for(element in document.getElementsByTagName('a')) {
 }
 }}}
 
-In actuality, that Javascript code does not comprise the entirety of what wootQuery does. For one, `getElementsByTagName()` does not return an Array but a `NodeList`, which is more limited in terms of available methods. In addition, what we want to do is not to replace the class, but to add one (but only if it isn't already applied). wootQuery takes care of both of these things.
+In actuality, that Javascript code does not comprise the entirety of what wootQuery does. For one, `getElementsByTagName()` does not return an `Array` but a `NodeList`, which is more limited in terms of available methods. In addition, what we want to do is not to replace the class, but to add one (but only if it isn't already applied). wootQuery takes care of both of these things.
 
 Desugaring these features is actually relatively simple. All arguments to `$()` are expected to be selectors, so the proper element-fetching processes are executed. For everything else, there is simply a function in `wootQuery.prototype` that will run the appropriate Javascript.
 
