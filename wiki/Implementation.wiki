@@ -71,7 +71,7 @@ With this implementation we can use Javascript's `map` function to perform the n
 == Interpreter/Compiler: ==
 wootQuery code is a chained function-call in Javascript. In the initial creation of the wootQuery object to be passed around, the wootQuery.prototype.init function is called. Init takes the argument to `$()` and searches the DOM for corresponding elements. The elements referenced in the object comprises the entire "state" of the object. Once the initial state is established, all further methods simply modify the state or return information based on the state, as shown in the example code above.
 
-The selector parsing can be thought of as the "interpreter" for wootQuery. It can be passed in one of two things: A DOM object, or a string. If a DOM object is passed in, it simply sets the DOM object as wootQuery.elements, and returns the object. Otherwise, it attempts to parse the string with a RegEx.
+The selector parsing can be thought of as the "interpreter" for wootQuery. It can be passed in one of two things: A DOM object, or a string. If a DOM object is passed in, it simply sets the DOM object as wootQuery.elements, and returns the object. Otherwise, it attempts to parse the string with a Regex.
 {{{
 #id
 tag
